@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>La Sabroso Café — Staff POS & Management Dashboard</title>
+  <meta name="description" content="La Sabroso Café Madhapur Staff POS Portal, Menu Management, Orders Kanban, Inventory & Analytics.">
+  
+  <!-- Google Fonts: Nunito, Dancing Script, Playfair Display (DESIGN.md Spec) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Nunito:wght@400;600;700;800&family=Playfair+Display:ital,wght@1,400;1,600&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Chart.js (Pinned Version) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="./globals.css">
+</head>
+<body>
+
+  <!-- DEMO LOGIN OVERLAY -->
+  <div id="login-overlay" class="login-screen" style="display: flex;">
+    <div class="login-left">
+      <div class="login-brand">
+        <div class="login-logo"><i class="fa-solid fa-mug-hot"></i></div>
+        <div>
+          <h2 class="brand-font" style="font-size: 28px; color: var(--c-butter);">La Sabroso</h2>
+          <p style="font-size: 11px; letter-spacing: 2px; color: var(--c-cream); text-transform: uppercase;">Madhapur, Hyderabad</p>
+        </div>
+      </div>
+      <div class="login-hero-text">
+        <h1>Feed your spirit.<br>Feed your belly.<br>Feed your soul.</h1>
+        <p>Italian-Indian fusion, artisan coffee, and modern point-of-sale management.</p>
+      </div>
+      <div style="font-size: 12px; color: rgba(255,255,255,0.7);">
+        © 2026 The Cafe La Sabroso, Madhapur.
+      </div>
+    </div>
+
+    <div class="login-right">
+      <div class="login-card">
+        <div style="text-align: center; margin-bottom: 28px;">
+          <div style="width: 56px; height: 56px; background: var(--c-butter); color: var(--c-forest); border-radius: var(--radius-full); display: inline-flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 12px;">
+            <i class="fa-solid fa-cash-register"></i>
+          </div>
+          <h2 style="font-size: 22px; color: var(--text-primary);">Staff POS Portal</h2>
+          <span class="badge badge-warning" style="margin-top: 6px;">Demo Mode — Client-Side Auth</span>
+          <p style="font-size: 12.5px; color: var(--text-secondary); margin-top: 8px;">Enter staff credentials or click Quick Demo Access to explore the POS system.</p>
+        </div>
+
+        <form id="login-form" onsubmit="handleLogin(event)">
+          <div style="margin-bottom: 16px;">
+            <label for="login-email" style="display: block; font-size: 12.5px; font-weight: 700; color: var(--text-primary); margin-bottom: 6px;">Staff Username / Email</label>
+            <input type="text" id="login-email" class="input-control input-plain" value="admin@lasabroso.com" required placeholder="admin@lasabroso.com" aria-label="Staff username or email">
+          </div>
+          <div style="margin-bottom: 20px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+              <label for="login-pass" style="font-size: 12.5px; font-weight: 700; color: var(--text-primary);">PIN / Password</label>
+              <span style="font-size: 11px; color: var(--text-muted);">Demo PIN: 1234</span>
+            </div>
+            <input type="password" id="login-pass" class="input-control input-plain" value="1234" required placeholder="••••" aria-label="Password or PIN">
+          </div>
+
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px;">
+            <label style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text-secondary); cursor: pointer;">
+              <input type="checkbox" id="remember-me" checked style="accent-color: var(--c-forest);"> Keep session active
+            </label>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%; padding: 12px;">
+            Enter Staff POS <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </form>
+
+        <div style="margin-top: 20px; text-align: center; display: flex; flex-direction: column; gap: 10px;">
+          <button onclick="quickDemoLogin()" class="btn btn-secondary btn-sm" style="width: 100%;">
+            <i class="fa-solid fa-bolt"></i> Quick Demo Auto-Login
+          </button>
+
+          <a href="index.html" class="btn btn-secondary btn-sm" style="width: 100%; text-decoration: none;">
+            <i class="fa-solid fa-house"></i> Return to Customer Website
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN APP CONTAINER -->
+  <div id="app" style="display: flex;">
+
+    <!-- SIDEBAR -->
+    <aside id="sidebar" class="sidebar">
+      <div class="sidebar-logo">
+        <div class="sidebar-logo-icon">
+          <i class="fa-solid fa-mug-hot"></i>
+        </div>
+        <div class="sidebar-brand-text">
+          <span class="sidebar-brand-title">La Sabroso</span>
+          <span class="sidebar-brand-subtitle">POS &amp; MANAGEMENT</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <!-- LINK BACK TO CUSTOMER SITE (Fixes B1) -->
+        <div class="nav-section-title">Website Navigation</div>
+        <a class="nav-item" href="index.html" style="color: var(--c-terracotta);">
+          <span class="nav-item-icon"><i class="fa-solid fa-globe"></i></span>
+          <span>Customer Site</span>
+        </a>
+
+        <div class="nav-section-title" style="margin-top: 12px;">POS &amp; Operations</div>
+        <a href="#dashboard" class="nav-item active" onclick="switchView('dashboard', this); return false;">
+          <span class="nav-item-icon"><i class="fa-solid fa-chart-pie"></i></span>
+          <span>Dashboard</span>
+        </a>
+        <a href="#orders" class="nav-item" onclick="switchView('orders', this); return false;">
+          <span class="nav-item-icon"><i class="fa-solid fa-receipt"></i></span>
+          <span>Orders Kanban</span>
+          <span class="nav-badge" id="new-orders-badge">3</span>
+        </a>
+        <a href="#menu" class="nav-item" onclick="switchView('menu', this); return false;">
+          <span class="nav-item-icon"><i class="fa-solid fa-utensils"></i></span>
+          <span>Menu Catalog</span>
+        </a>
+        <a href="#categories" class="nav-item" onclick="switchView('categories', this); return false;">
+          <span class="nav-item-icon"><i class="fa-solid fa-layer-group"></i></span>
+          <span>Categories</span>
+        </a>
+        <a href="#inventory" class="nav-item" onclick="switchView('inventory', this); return false;">
+          <span class="nav-item-icon"><i class="fa-solid fa-boxes-stacked"></i></span>
+          <span>Inventory</span>
+          <span class="nav-badge" style="background: var(--c-terracotta);" id="low-stock-badge">2</span>
+        </a>
+        <a href="#customers" class="nav-item" onclick="switchView('customers', this); return false;">
+          <span class="nav-item-icon"><i class="fa-solid fa-users"></i></span>
+          <span>Guests &amp; VIPs</span>
+        </a>
+
+        <div class="nav-section-title" style="margin-top: 16px;">Management</div>
+        <a href="#staff" class="nav-item" onclick="switchView('staff', this); return false;">
+          <span class="nav-item-icon"><i class="fa-solid fa-user-shield"></i></span>
+          <span>Staff Shifts</span>
+        </a>
+        <a href="#reports" class="nav-item" onclick="switchView('reports', this); return false;">
+          <span class="nav-item-icon"><i class="fa-solid fa-chart-line"></i></span>
+          <span>Sales Reports</span>
+        </a>
+        <a href="#settings" class="nav-item" onclick="switchView('settings', this); return false;">
+          <span class="nav-item-icon"><i class="fa-solid fa-sliders"></i></span>
+          <span>Settings</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-user">
+          <div class="user-avatar">AS</div>
+          <div class="user-info">
+            <span class="user-name">Madhapur Staff</span>
+            <span class="user-role">Shift Lead</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <div class="main-wrapper">
+
+      <!-- TOP HEADER -->
+      <header class="top-header">
+        <div class="header-left">
+          <button class="mobile-toggle" onclick="toggleSidebar()" aria-label="Toggle navigation menu"><i class="fa-solid fa-bars"></i></button>
+          
+          <div class="branch-selector">
+            <i class="fa-solid fa-location-dot" style="color: var(--c-terracotta);"></i>
+            <select id="branch-select" style="background: transparent; border: none; font: inherit; color: inherit; cursor: pointer; outline: none;" aria-label="Select outlet branch">
+              <option value="madhapur">Madhapur (Main Branch)</option>
+              <option value="jubilee">Jubilee Hills Express</option>
+              <option value="gachibowli">Gachibowli Roastery</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="header-right">
+          <div class="header-time-pill">
+            <i class="fa-regular fa-clock" style="color: var(--c-terracotta);"></i>
+            <span id="live-datetime">Tue, Aug 18 • 12:15 PM</span>
+          </div>
+
+          <button class="header-icon-btn" title="Toggle Dark Roast Theme" onclick="toggleTheme()" aria-label="Toggle dark theme">
+            <i class="fa-solid fa-moon" id="theme-icon"></i>
+          </button>
+
+          <button class="header-icon-btn" title="Notifications" onclick="showToast('No unread system alerts', 'info')" aria-label="Notifications">
+            <i class="fa-regular fa-bell"></i>
+            <span class="notification-dot"></span>
+          </button>
+
+          <button class="btn btn-primary btn-sm" onclick="openPosModal()">
+            <i class="fa-solid fa-plus"></i> New Sale (POS)
+          </button>
+
+          <a href="index.html" class="btn btn-secondary btn-sm" title="View Customer Website">
+            <i class="fa-solid fa-store"></i> Site
+          </a>
+
+          <button class="btn btn-secondary btn-sm" onclick="logout()" title="Logout" aria-label="Sign out">
+            <i class="fa-solid fa-right-from-bracket"></i>
+          </button>
+        </div>
+      </header>
+
+      <!-- PAGE CONTAINER -->
+      <main class="page-container">
+
+        <!-- VIEW 1: DASHBOARD -->
+        <section id="view-dashboard" class="app-view">
+          <div class="page-header">
+            <div class="page-title-group">
+              <h1>Good morning, Admin ☕</h1>
+              <p>Here’s what’s happening at La Sabroso, Madhapur today.</p>
+            </div>
+            <div class="page-actions">
+              <button class="btn btn-secondary" onclick="exportDailyReport()"><i class="fa-solid fa-download"></i> Summary PDF</button>
+              <button class="btn btn-primary" onclick="openPosModal()"><i class="fa-solid fa-cart-plus"></i> Quick POS Sale</button>
+            </div>
+          </div>
+
+          <!-- KPI Cards (₹ Currency - Fixes H1) -->
+          <div class="kpi-grid">
+            <div class="kpi-card">
+              <div class="kpi-info">
+                <span class="kpi-label">Today's Sales</span>
+                <span class="kpi-value" id="kpi-sales-val">₹42,850</span>
+                <span class="kpi-trend positive"><i class="fa-solid fa-arrow-up"></i> +14.2% vs yesterday</span>
+              </div>
+              <div class="kpi-icon-wrapper">
+                <i class="fa-solid fa-indian-rupee-sign"></i>
+              </div>
+            </div>
+
+            <div class="kpi-card">
+              <div class="kpi-info">
+                <span class="kpi-label">Today's Orders</span>
+                <span class="kpi-value" id="kpi-orders-val">78</span>
+                <span class="kpi-trend positive"><i class="fa-solid fa-arrow-up"></i> +8 orders</span>
+              </div>
+              <div class="kpi-icon-wrapper">
+                <i class="fa-solid fa-bag-shopping"></i>
+              </div>
+            </div>
+
+            <div class="kpi-card">
+              <div class="kpi-info">
+                <span class="kpi-label">Avg Order Value</span>
+                <span class="kpi-value" id="kpi-aov-val">₹549</span>
+                <span class="kpi-trend positive"><i class="fa-solid fa-arrow-up"></i> +₹45</span>
+              </div>
+              <div class="kpi-icon-wrapper">
+                <i class="fa-solid fa-chart-bar"></i>
+              </div>
+            </div>
+
+            <div class="kpi-card">
+              <div class="kpi-info">
+                <span class="kpi-label">Low Stock Items</span>
+                <span class="kpi-value" id="kpi-low-stock-val" style="color: var(--c-terracotta);">2</span>
+                <span class="kpi-trend negative" style="color: var(--c-terracotta);"><i class="fa-solid fa-triangle-exclamation"></i> Action required</span>
+              </div>
+              <div class="kpi-icon-wrapper" style="background: var(--warning-bg); color: var(--c-terracotta);">
+                <i class="fa-solid fa-boxes-stacked"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sales Overview & Popular Today -->
+          <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 24px; margin-bottom: 24px;">
+            <!-- Sales Chart -->
+            <div class="card" style="margin-bottom: 0;">
+              <div class="card-header">
+                <div>
+                  <h3 class="card-title">Sales Revenue Overview</h3>
+                  <p class="card-subtitle">Revenue trend in Indian Rupees (₹)</p>
+                </div>
+                <div style="display: flex; gap: 6px;">
+                  <button class="btn btn-primary btn-sm" id="btn-chart-daily" onclick="updateSalesChart('daily')">Daily</button>
+                  <button class="btn btn-secondary btn-sm" id="btn-chart-weekly" onclick="updateSalesChart('weekly')">Weekly</button>
+                  <button class="btn btn-secondary btn-sm" id="btn-chart-monthly" onclick="updateSalesChart('monthly')">Monthly</button>
+                </div>
+              </div>
+              <div style="height: 280px; position: relative;">
+                <canvas id="salesChart"></canvas>
+              </div>
+            </div>
+
+            <!-- Popular Today -->
+            <div class="card" style="margin-bottom: 0;">
+              <div class="card-header">
+                <div>
+                  <h3 class="card-title">Popular Today</h3>
+                  <p class="card-subtitle">Top ordered live items</p>
+                </div>
+              </div>
+              <div id="popular-today-list" style="display: flex; flex-direction: column; gap: 12px;">
+                <!-- Dynamic items -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Recent Orders Table -->
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h3 class="card-title">Recent Orders Feed</h3>
+                <p class="card-subtitle">Live POS &amp; Dine-in order transactions</p>
+              </div>
+              <button class="btn btn-secondary btn-sm" onclick="switchView('orders')">View All Kanban Orders</button>
+            </div>
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Order ID</th>
+                    <th>Customer</th>
+                    <th>Items</th>
+                    <th>Amount (₹)</th>
+                    <th>Payment</th>
+                    <th>Status</th>
+                    <th>Time</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="recent-orders-tbody">
+                  <!-- Dynamic items -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- VIEW 2: ORDERS KANBAN -->
+        <section id="view-orders" class="app-view" style="display: none;">
+          <div class="page-header">
+            <div class="page-title-group">
+              <h1>Order Status Kanban</h1>
+              <p>Kitchen display &amp; barista workflow order board.</p>
+            </div>
+            <div class="page-actions">
+              <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                <input type="text" class="input-control" placeholder="Search order # or guest..." onkeyup="filterOrdersKanban(this.value)" aria-label="Search orders">
+              </div>
+              <button class="btn btn-primary" onclick="openPosModal()"><i class="fa-solid fa-plus"></i> New Order</button>
+            </div>
+          </div>
+
+          <div class="kanban-board">
+            <div class="kanban-column">
+              <div class="kanban-column-header">
+                <span class="column-title"><i class="fa-solid fa-circle" style="color: var(--info); font-size: 10px;"></i> New Received</span>
+                <span class="badge badge-info" id="count-new">0</span>
+              </div>
+              <div id="col-new" class="kanban-cards-container"></div>
+            </div>
+
+            <div class="kanban-column">
+              <div class="kanban-column-header">
+                <span class="column-title"><i class="fa-solid fa-circle" style="color: var(--c-terracotta); font-size: 10px;"></i> Preparing</span>
+                <span class="badge badge-warning" id="count-preparing">0</span>
+              </div>
+              <div id="col-preparing" class="kanban-cards-container"></div>
+            </div>
+
+            <div class="kanban-column">
+              <div class="kanban-column-header">
+                <span class="column-title"><i class="fa-solid fa-circle" style="color: var(--c-forest); font-size: 10px;"></i> Ready for Pickup</span>
+                <span class="badge badge-success" id="count-ready">0</span>
+              </div>
+              <div id="col-ready" class="kanban-cards-container"></div>
+            </div>
+
+            <div class="kanban-column">
+              <div class="kanban-column-header">
+                <span class="column-title"><i class="fa-solid fa-circle" style="color: var(--text-muted); font-size: 10px;"></i> Completed</span>
+                <span class="badge" style="background: var(--c-parchment); color: var(--text-secondary);" id="count-completed">0</span>
+              </div>
+              <div id="col-completed" class="kanban-cards-container"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- VIEW 3: MENU MANAGEMENT (Real 121 Menu Items - Fixes B2) -->
+        <section id="view-menu" class="app-view" style="display: none;">
+          <div class="page-header">
+            <div class="page-title-group">
+              <h1>Menu Management Catalog</h1>
+              <p>Configure products from La Sabroso's live menu (121 items), prices, and availability.</p>
+            </div>
+            <div class="page-actions">
+              <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                <input type="text" class="input-control" placeholder="Search 121 menu items..." onkeyup="filterMenuGrid(this.value)" aria-label="Search menu catalog">
+              </div>
+              <button class="btn btn-primary" onclick="openAddMenuModal()"><i class="fa-solid fa-plus"></i> Add Item</button>
+            </div>
+          </div>
+
+          <!-- Category Pill Filters -->
+          <div class="category-tabs" id="menu-cat-tabs">
+            <button class="cat-tab active" onclick="filterMenuCategory('All', this)">All Items</button>
+            <button class="cat-tab" onclick="filterMenuCategory('La Sabroso Favourites', this)">Favourites</button>
+            <button class="cat-tab" onclick="filterMenuCategory('Burgers', this)">Burgers</button>
+            <button class="cat-tab" onclick="filterMenuCategory('Pizzas', this)">Pizzas</button>
+            <button class="cat-tab" onclick="filterMenuCategory('Pastas', this)">Pastas</button>
+            <button class="cat-tab" onclick="filterMenuCategory('Hot Beverages', this)">Hot Beverages</button>
+            <button class="cat-tab" onclick="filterMenuCategory('Cold Beverages', this)">Cold Beverages</button>
+            <button class="cat-tab" onclick="filterMenuCategory('Desserts', this)">Desserts</button>
+          </div>
+
+          <!-- Product Cards Grid -->
+          <div class="product-grid" id="product-cards-container">
+            <!-- Dynamic menu items -->
+          </div>
+        </section>
+
+        <!-- VIEW 4: CATEGORIES -->
+        <section id="view-categories" class="app-view" style="display: none;">
+          <div class="page-header">
+            <div class="page-title-group">
+              <h1>Category Management</h1>
+              <p>Organize menu categories and item distributions.</p>
+            </div>
+            <button class="btn btn-primary" onclick="showToast('Category manager active', 'info')"><i class="fa-solid fa-plus"></i> Add Category</button>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px;" id="categories-grid">
+            <!-- Dynamic categories -->
+          </div>
+        </section>
+
+        <!-- VIEW 5: INVENTORY MANAGEMENT -->
+        <section id="view-inventory" class="app-view" style="display: none;">
+          <div class="page-header">
+            <div class="page-title-group">
+              <h1>Ingredient Inventory</h1>
+              <p>Track raw café ingredients, coffee beans, dairy &amp; packaging supplies.</p>
+            </div>
+            <div class="page-actions">
+              <button class="btn btn-secondary" onclick="filterInventoryStatus('low')"><i class="fa-solid fa-filter"></i> Low Stock Alerts</button>
+              <button class="btn btn-primary" onclick="openRestockModal()"><i class="fa-solid fa-arrow-up-from-bracket"></i> Quick Restock</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Item</th>
+                    <th>Category</th>
+                    <th>Current Stock</th>
+                    <th>Unit</th>
+                    <th>Min Threshold</th>
+                    <th>Status</th>
+                    <th>Last Updated</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="inventory-tbody">
+                  <!-- Dynamic inventory items -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- VIEW 6: CUSTOMERS -->
+        <section id="view-customers" class="app-view" style="display: none;">
+          <div class="page-header">
+            <div class="page-title-group">
+              <h1>Guest &amp; VIP Directory</h1>
+              <p>Manage Madhapur café guests, order histories &amp; loyalty points.</p>
+            </div>
+            <div class="search-box">
+              <i class="fa-solid fa-magnifying-glass search-icon"></i>
+              <input type="text" class="input-control" placeholder="Search customer name or phone..." onkeyup="filterCustomersTable(this.value)" aria-label="Search customers">
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Customer Name</th>
+                    <th>Contact Info</th>
+                    <th>Total Orders</th>
+                    <th>Total Spent (₹)</th>
+                    <th>Last Visit</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="customers-tbody">
+                  <!-- Dynamic customer rows -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- VIEW 7: STAFF -->
+        <section id="view-staff" class="app-view" style="display: none;">
+          <div class="page-header">
+            <div class="page-title-group">
+              <h1>Staff Roster &amp; Shifts</h1>
+              <p>Manage baristas, cashiers, and shift schedules.</p>
+            </div>
+            <button class="btn btn-primary" onclick="showToast('Staff addition modal', 'info')"><i class="fa-solid fa-user-plus"></i> Add Staff</button>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px;" id="staff-grid">
+            <!-- Dynamic staff cards -->
+          </div>
+        </section>
+
+        <!-- VIEW 8: REPORTS & ANALYTICS -->
+        <section id="view-reports" class="app-view" style="display: none;">
+          <div class="page-header">
+            <div class="page-title-group">
+              <h1>Sales Reports &amp; Analytics</h1>
+              <p>Deep-dive into sales performance, peak hours &amp; payment method breakdowns.</p>
+            </div>
+            <div class="page-actions">
+              <select class="select-control" aria-label="Select report time period">
+                <option>This Week</option>
+                <option>This Month</option>
+                <option>Quarter 3</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px;">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Category Sales Split</h3>
+              </div>
+              <div style="height: 250px; position: relative;">
+                <canvas id="categoryChart"></canvas>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Peak Café Hours (Madhapur)</h3>
+              </div>
+              <div style="height: 250px; position: relative;">
+                <canvas id="peakHoursChart"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Payment Methods Split</h3>
+              </div>
+              <div style="height: 250px; position: relative;">
+                <canvas id="paymentChart"></canvas>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Best Sellers Ranking</h3>
+              </div>
+              <div id="bestsellers-list" style="display: flex; flex-direction: column; gap: 12px;">
+                <!-- Dynamic bestsellers -->
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- VIEW 9: SETTINGS -->
+        <section id="view-settings" class="app-view" style="display: none;">
+          <div class="page-header">
+            <div class="page-title-group">
+              <h1>System Settings</h1>
+              <p>Branch preferences, receipts, currency &amp; theme configuration.</p>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 240px 1fr; gap: 24px;">
+            <div class="card" style="padding: 16px;">
+              <div style="display: flex; flex-direction: column; gap: 4px;">
+                <button class="nav-item active" style="justify-content: flex-start;">General Info</button>
+                <button class="nav-item" style="justify-content: flex-start;" onclick="showToast('Receipt Template Settings', 'info')">Receipt &amp; Taxes</button>
+                <button class="nav-item" style="justify-content: flex-start;" onclick="showToast('POS Printer Hardware', 'info')">Thermal Printers</button>
+              </div>
+            </div>
+
+            <div class="card">
+              <h3 class="card-title" style="margin-bottom: 20px;">Café Identity &amp; Location Parameters</h3>
+              
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+                <div>
+                  <label for="setting-name" style="display: block; font-size: 12.5px; font-weight: 700; margin-bottom: 6px;">Café Name</label>
+                  <input type="text" id="setting-name" class="input-control input-plain" value="The Cafe La Sabroso">
+                </div>
+                <div>
+                  <label for="setting-tagline" style="display: block; font-size: 12.5px; font-weight: 700; margin-bottom: 6px;">Official Tagline</label>
+                  <input type="text" id="setting-tagline" class="input-control input-plain" value="Feed your spirit. Feed your belly. Feed your soul.">
+                </div>
+              </div>
+
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px;">
+                <div>
+                  <label for="setting-tax" style="display: block; font-size: 12.5px; font-weight: 700; margin-bottom: 6px;">GST Tax Rate (%)</label>
+                  <input type="number" id="setting-tax" class="input-control input-plain" value="5.0" step="0.1">
+                </div>
+                <div>
+                  <label for="setting-currency" style="display: block; font-size: 12.5px; font-weight: 700; margin-bottom: 6px;">Currency Symbol</label>
+                  <input type="text" id="setting-currency" class="input-control input-plain" value="₹" readonly>
+                </div>
+              </div>
+
+              <div style="padding-top: 16px; border-top: 1px solid var(--divider); display: flex; align-items: center; justify-content: space-between;">
+                <div>
+                  <div style="font-weight: 700; color: var(--text-primary);">Dark Roast Theme Mode</div>
+                  <div style="font-size: 12px; color: var(--text-muted);">Switch interface to dark roasted coffee aesthetics</div>
+                </div>
+                <button class="btn btn-secondary" onclick="toggleTheme()"><i class="fa-solid fa-circle-half-stroke"></i> Switch Theme</button>
+              </div>
+
+              <div style="margin-top: 24px; text-align: right;">
+                <button class="btn btn-primary" onclick="showToast('Settings updated successfully!', 'success')">Save Settings</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- MODAL 1: NEW POS ORDER -->
+  <div id="modal-pos" class="modal-overlay">
+    <div class="modal-card" style="max-width: 720px;">
+      <div class="modal-header">
+        <h3 class="modal-title brand-font" style="font-size: 24px; color: var(--c-forest);"><i class="fa-solid fa-cash-register" style="color: var(--c-terracotta);"></i> New POS Sale (₹)</h3>
+        <button class="btn btn-secondary btn-sm btn-icon-only" onclick="closeModal('modal-pos')" aria-label="Close POS sale modal"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <div class="modal-body" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+        <div>
+          <label style="display: block; font-weight: 700; margin-bottom: 8px; font-size: 12.5px;">Select Available Items</label>
+          <div id="pos-items-selector" style="display: flex; flex-direction: column; gap: 8px; max-height: 320px; overflow-y: auto; padding-right: 4px;">
+            <!-- Dynamic POS items -->
+          </div>
+        </div>
+
+        <div style="background: var(--c-parchment); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 16px; display: flex; flex-direction: column;">
+          <h4 style="font-size: 14px; font-weight: 800; margin-bottom: 12px; border-bottom: 1px dashed var(--border); padding-bottom: 8px;">Order Summary</h4>
+          
+          <div id="pos-cart-items" style="flex: 1; min-height: 160px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px;">
+            <div class="empty-state" style="padding: 24px 0;">
+              <i class="fa-solid fa-mug-saucer empty-icon" style="font-size: 28px;"></i>
+              <p style="font-size: 12px;">Click available menu items to add to order</p>
+            </div>
+          </div>
+
+          <div style="border-top: 1px solid var(--border); padding-top: 12px; margin-top: 12px; font-size: 13px;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+              <span style="color: var(--text-secondary);">Subtotal</span>
+              <span id="pos-subtotal" style="font-weight: 700;">₹0.00</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+              <span style="color: var(--text-secondary);">GST (5%)</span>
+              <span id="pos-tax" style="font-weight: 700;">₹0.00</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; font-size: 16px; font-weight: 800; color: var(--c-terracotta); margin-top: 8px; padding-top: 6px; border-top: 1px solid var(--divider);">
+              <span>Total</span>
+              <span id="pos-total">₹0.00</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeModal('modal-pos')">Cancel</button>
+        <button class="btn btn-primary" onclick="submitPosOrder()"><i class="fa-solid fa-check"></i> Complete Sale &amp; Print Receipt</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL 2: ADD MENU ITEM -->
+  <div id="modal-add-item" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title brand-font" style="font-size: 24px; color: var(--c-forest);">+ Add New Menu Item</h3>
+        <button class="btn btn-secondary btn-sm btn-icon-only" onclick="closeModal('modal-add-item')" aria-label="Close add item modal"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <form id="add-item-form" onsubmit="handleCreateMenuItem(event)">
+        <div class="modal-body">
+          <div style="margin-bottom: 14px;">
+            <label for="new-item-name" style="display: block; font-size: 12.5px; font-weight: 700; margin-bottom: 6px;">Product Name</label>
+            <input type="text" id="new-item-name" class="input-control input-plain" placeholder="e.g. Biscoff Cold Coffee" required aria-label="Item name">
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px;">
+            <div>
+              <label for="new-item-cat" style="display: block; font-size: 12.5px; font-weight: 700; margin-bottom: 6px;">Category</label>
+              <select id="new-item-cat" class="select-control" style="width: 100%;" aria-label="Select category">
+                <option value="La Sabroso Favourites">La Sabroso Favourites</option>
+                <option value="Burgers">Burgers</option>
+                <option value="Pizzas">Pizzas</option>
+                <option value="Pastas">Pastas</option>
+                <option value="Hot Beverages">Hot Beverages</option>
+                <option value="Cold Beverages">Cold Beverages</option>
+                <option value="Desserts">Desserts</option>
+              </select>
+            </div>
+            <div>
+              <label for="new-item-price" style="display: block; font-size: 12.5px; font-weight: 700; margin-bottom: 6px;">Price (₹)</label>
+              <input type="number" id="new-item-price" step="1" min="1" class="input-control input-plain" placeholder="350" required aria-label="Item price in rupees">
+            </div>
+          </div>
+
+          <div style="margin-bottom: 14px;">
+            <label for="new-item-desc" style="display: block; font-size: 12.5px; font-weight: 700; margin-bottom: 6px;">Description</label>
+            <textarea id="new-item-desc" class="input-control input-plain" style="height: 60px;" placeholder="Freshly crafted item..." aria-label="Item description"></textarea>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" onclick="closeModal('modal-add-item')">Cancel</button>
+          <button type="submit" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Create Item</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL 3: RESTOCK INVENTORY -->
+  <div id="modal-restock" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title brand-font" style="font-size: 24px; color: var(--c-forest);">Restock Ingredient Stock</h3>
+        <button class="btn btn-secondary btn-sm btn-icon-only" onclick="closeModal('modal-restock')" aria-label="Close restock modal"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <div class="modal-body">
+        <div style="margin-bottom: 14px;">
+          <label for="restock-item-select" style="display: block; font-size: 12.5px; font-weight: 700; margin-bottom: 6px;">Select Ingredient</label>
+          <select id="restock-item-select" class="select-control" style="width: 100%;" aria-label="Select ingredient to restock">
+            <!-- Dynamic options -->
+          </select>
+        </div>
+
+        <div style="margin-bottom: 14px;">
+          <label for="restock-qty" style="display: block; font-size: 12.5px; font-weight: 700; margin-bottom: 6px;">Quantity to Add (Positive number)</label>
+          <input type="number" id="restock-qty" class="input-control input-plain" value="10" min="1" required aria-label="Quantity to add">
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeModal('modal-restock')">Cancel</button>
+        <button class="btn btn-primary" onclick="submitRestock()"><i class="fa-solid fa-check"></i> Add Stock</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- DRAWER: CUSTOMER DETAIL -->
+  <div id="modal-customer" class="modal-overlay">
+    <div class="modal-card" style="max-width: 480px;">
+      <div class="modal-header">
+        <h3 class="modal-title brand-font" id="customer-modal-name" style="font-size: 22px; color: var(--c-forest);">Guest Profile</h3>
+        <button class="btn btn-secondary btn-sm btn-icon-only" onclick="closeModal('modal-customer')" aria-label="Close customer detail modal"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <div class="modal-body" id="customer-modal-body">
+        <!-- Dynamic guest details -->
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeModal('modal-customer')">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST CONTAINER -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- Application Logic -->
+  <script src="./app.js"></script>
+</body>
+</html>

@@ -1,70 +1,43 @@
-# La Sabroso — Design Template
+# La Sabroso — Customer Website & Staff POS Management System
 
-A standalone brand + page template for **The Cafe La Sabroso**, Madhapur,
-Hyderabad — built from the cafe's live design language (lasabroso.com), its
-Instagram (@lasabroso_cafe), its live dine-in menu (Petpooja QR menu), and
-public listings (Zomato, Swiggy Dineout, EazyDiner).
-
-> Fan craft / redesign concept — not affiliated with the cafe.
+A complete brand + page template + staff Point-of-Sale (POS) dashboard for **The Cafe La Sabroso**, Madhapur, Hyderabad — built from the cafe's live design language (lasabroso.com), its Instagram (@lasabroso_cafe), its live dine-in menu (Petpooja QR menu), and official brand specifications.
 
 ## What's inside
 
 ```
-DESIGN.md                  Brand token spec: palette, type, shape, motion,
-                           imagery direction, component inventory — reusable
-                           for menus, social posts, signage, future pages.
-index.html                 Home: hero, offer strip, specialties, signature
-                           creations, about teaser, delivery/dine-in partners,
-                           events (Boho-Neon dark section), testimonials,
-                           moments strip, newsletter, footer.
-menu.html                  Full live menu: 121 dishes · 20 categories ·
-                           category tabs + search + veg/non-veg tags +
-                           chef's-pick badges + real food photos.
+DESIGN.md                  Brand token spec: forest green #2E5D34, cream #FFF9E6,
+                           terracotta #E57A4F, mint #D5F5E3, butter #FFF9D1,
+                           Dancing Script, Nunito, Playfair Display.
+index.html                 Customer Homepage: hero, offer strip, specialties, signature
+                           creations, partners, events, testimonials, footer + link to Staff POS.
+pos.html                   Staff POS Portal: live POS sale builder (₹), Order Kanban board,
+                           121-item menu catalog manager, ingredient inventory tracking,
+                           customer directory, analytics charts, and Dark Roast mode.
+menu.html                  Full live customer menu: 121 dishes · 20 categories ·
+                           category tabs + search + veg/non-veg tags + real food photos.
 gallery.html               16-slot masonry gallery + lightbox + IG highlights.
-about.html                 Origin story, signatures, amenities, Boho Neon.
-contact.html               Address/map, phone/email, hours, amenities,
-                           rating, reservation partners (District/Dineout).
-assets/css/style.css       The full design system (single stylesheet).
-assets/js/main.js          Nav toggle, reveal, menu filters/search, carousel,
-                           lightbox, newsletter — vanilla, no dependencies.
-assets/js/menu-data.json   Live menu extract (Aug 17 2026, Petpooja dine-in):
-                           name, price, description, veg flag, photo URL.
-assets/img/README.md       Photo-slot guide for swapping in real photography.
+about.html                 Origin story, signatures, amenities, Boho Neon ambiance.
+contact.html               Address/map, phone/email, hours, amenities, rating.
+globals.css                POS & design system stylesheet matching DESIGN.md tokens.
+app.js                     POS state engine, XSS-safe rendering, ₹ formatting, stock guards.
+assets/css/style.css       Customer site design system stylesheet.
+assets/js/main.js          Customer site JS (carousel, lightbox, menu rendering).
+assets/js/menu-data.json   Live menu extract (121 dishes, real prices in ₹, veg flags).
 ```
 
-## Brand language (from DESIGN.md)
+## Running the Application
 
-- Forest green `#2E5D34` + cream `#FFF9E6` + terracotta `#E57A4F`,
-  mint `#D5F5E3`, gold `#FFD700`, neon pink `#FF5C8A` (sign only)
-- Dancing Script (wordmark/kickers) · Nunito (UI/body) · Playfair italic (quotes)
-- Pill buttons, 20px card radii, warm soft shadows, dotted terracotta leaders
-- Boho-Neon motion: gentle lifts, scroll reveals, neon-sign flicker
-
-## Run it
-
-Any static server, or just open index.html:
+Open `index.html` for the customer experience or `pos.html` for the staff management portal in any browser or static HTTP server:
 
 ```bash
-cd LaSabroso
-python3 -m http.server 8000
-# → http://localhost:8000
+python -m http.server 8000
+# Customer Site: http://localhost:8000/index.html
+# Staff POS Portal: http://localhost:8000/pos.html
 ```
 
-## Deploy anywhere
+## Security & Data Integrity Improvements
 
-The whole folder is self-contained static HTML/CSS/JS (only external deps are
-Google Fonts + Unsplash/Petpooja hot-linked images). Drop the folder onto
-Netlify, Vercel, GitHub Pages, S3/CloudFront, or any Apache/Nginx docroot.
-
-## Updating the menu
-
-`assets/js/menu-data.json` is the single source. Refresh by re-extracting from
-the live QR menu (https://dinein.petpooja.com/orders/category/fm32c9qw/19)
-or hand-editing — menu.html renders from it at load time.
-
-## Verification status (Aug 17 2026)
-
-- 121 items / 20 categories / 41 real photos (menu-data.json)
-- All 5 pages share contract components; no per-page CSS
-- No console errors; menu tabs + search, carousel, lightbox verified in browser
-- Canonical brand data (hours 11–11, phone, address, rating) from official site + Zomato
+- **XSS Prevention**: Dynamic rendering sinks use HTML-escaping (`esc()`).
+- **Currency & Localized Data**: Prices rendered in Indian Rupees (₹) using real menu items from Madhapur, Hyderabad.
+- **Stock & Sale Guards**: Restock quantities strictly validated (`qty > 0`), unavailable items excluded from POS checkout.
+- **State Persistence**: Catalog and orders persist across page reloads via `localStorage`.
