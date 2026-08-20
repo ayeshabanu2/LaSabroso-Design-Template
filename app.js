@@ -1,6 +1,6 @@
 /* ==========================================================================
    La Sabroso Café — Core POS & Management Engine (Production Ready)
-   - Real 121 Live Menu Items from menu-data.json
+   - Full Menu: fetches assets/js/menu-data.json on load (16-item seed fallback)
    - Indian Rupee (₹) Formatting for Madhapur, Hyderabad
    - Stored-XSS Escaping Helper across all innerHTML sinks
    - Stock & Availability Integrity Guards
@@ -19,7 +19,7 @@ function esc(str) {
     .replace(/'/g, '&#039;');
 }
 
-// --- 2. INITIAL REAL MENU SEED DATA (121 Live Items from menu-data.json) ---
+// --- 2. SEED MENU (16 items) — fallback if menu-data.json fetch fails ---
 const SEED_MENU_ITEMS = [
   { id: 1, category: "La Sabroso Favourites", name: "Honey Lemon Pepper Chicken Tenders", price: 544, desc: "Crispy fried chicken tenders drenched in a rich honey lemon pepper sauce", veg: false, available: true, ordersCount: 142, img: "https://dineinpetweb.gumlet.io/homewebsite/104812/thumb_17816798790_2026_06_17_12_33_43_Honey_Lemon_Pepper_chicken_Tenders.jpeg" },
   { id: 2, category: "La Sabroso Favourites", name: "Creamy Garlic Prawns", price: 584, desc: "Crispy fried prawns served on a bed of rich, garlicky white cream sauce.", veg: false, available: true, ordersCount: 98, img: null },
@@ -115,22 +115,69 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // --- LOCALSTORAGE PERSISTENCE (Fix M4) ---
-function initMenuState() {
-  const saved = localStorage.getItem('lasabroso_menu_v1');
+async function initMenuState() {
+  const saved = localStorage.getItem('lasabroso_menu_v2');
   if (saved) {
     try {
-      appState.menu = JSON.parse(saved);
-    } catch (e) {
-      appState.menu = [...SEED_MENU_ITEMS];
-    }
-  } else {
-    appState.menu = [...SEED_MENU_ITEMS];
-    saveMenuState();
+      const parsed = JSON.parse(saved);
+      if (Array.isArray(parsed) && parsed.length >= 16) {
+        appState.menu = parsed;
+        updateCatalogUiCounters();
+        renderMenuGrid();
+        renderCategoriesGrid();
+        renderPosItemsSelector();
+        return;
+      }
+    } catch (e) { console.warn('Menu cache error:', e); }
   }
+
+  // Async load of full live menu (R2-1 Fix)
+  try {
+    const res = await fetch('assets/js/menu-data.json');
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+    if (Array.isArray(data) && data.length > 0) {
+      appState.menu = data.map((item, idx) => ({
+        id: idx + 1,
+        category: item.category || 'La Sabroso Favourites',
+        name: item.name,
+        price: Number(item.price) || 0,
+        desc: item.desc || 'Freshly prepared specialty dish.',
+        veg: item.veg !== undefined ? Boolean(item.veg) : true,
+        available: true,
+        ordersCount: Math.max(15, 250 - idx * 2),
+        img: item.img || null
+      }));
+      saveMenuState();
+      updateCatalogUiCounters();
+      renderMenuGrid();
+      renderCategoriesGrid();
+      renderPosItemsSelector();
+      return;
+    }
+  } catch (err) {
+    console.warn('menu-data.json fetch failed — using 16-item seed:', err.message);
+  }
+
+  // Fallback to 16-item seed
+  appState.menu = [...SEED_MENU_ITEMS];
+  saveMenuState();
+  updateCatalogUiCounters();
+  renderMenuGrid();
+  renderCategoriesGrid();
+  renderPosItemsSelector();
+}
+
+function updateCatalogUiCounters() {
+  const total = appState.menu.length;
+  const subtitleEl = document.getElementById('menu-subtitle');
+  if (subtitleEl) subtitleEl.textContent = `Configure products from La Sabroso's live menu (${total} items), prices, and availability.`;
+  const searchInput = document.querySelector('#view-menu input[aria-label="Search menu catalog"]');
+  if (searchInput) searchInput.placeholder = `Search ${total} menu items...`;
 }
 
 function saveMenuState() {
-  localStorage.setItem('lasabroso_menu_v1', JSON.stringify(appState.menu));
+  localStorage.setItem('lasabroso_menu_v2', JSON.stringify(appState.menu));
 }
 
 function initOrdersState() {
@@ -848,9 +895,14 @@ function renderPosCart() {
     subtotal += lineTotal;
     return `
       <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12.5px; background: var(--surface); padding: 8px 10px; border-radius: var(--radius-sm); border: 1px solid var(--border);">
-        <div style="flex: 1;">
-          <div style="font-weight: 700;">${esc(c.name)}</div>
-          <div style="color: var(--text-muted); font-size: 11px;">₹${c.price} x ${c.qty}</div>
+        <div style="flex: 1; padding-right: 8px;">
+          <div style="font-weight: 700; line-height: 1.2;">${esc(c.name)}</div>
+          <div style="color: var(--text-muted); font-size: 11px; margin-top: 2px;">₹${c.price.toLocaleString('en-IN')}</div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 6px; margin-right: 10px;">
+          <button class="btn btn-secondary btn-sm btn-icon-only" style="padding:0;height:22px;width:22px;line-height:20px;" aria-label="Decrease quantity" onclick="updateCartQty(${c.id}, -1)">−</button>
+          <span style="font-weight: 800; width: 18px; text-align: center;">${c.qty}</span>
+          <button class="btn btn-secondary btn-sm btn-icon-only" style="padding:0;height:22px;width:22px;line-height:20px;" aria-label="Increase quantity" onclick="updateCartQty(${c.id}, 1)">+</button>
         </div>
         <div style="font-weight: 800; color: var(--c-terracotta); margin-right: 10px;">₹${lineTotal.toLocaleString('en-IN')}</div>
         <button class="btn btn-danger btn-sm btn-icon-only" style="padding: 2px 6px; height: 24px;" aria-label="Remove item" onclick="removeFromPosCart(${c.id})"><i class="fa-solid fa-xmark"></i></button>
@@ -866,13 +918,29 @@ function removeFromPosCart(id) {
   renderPosCart();
 }
 
+// Per-line quantity adjustment (R2-7 Fix)
+function updateCartQty(id, delta) {
+  const item = appState.posCart.find(c => c.id === id);
+  if (!item) return;
+  item.qty += delta;
+  if (item.qty <= 0) {
+    appState.posCart = appState.posCart.filter(c => c.id !== id);
+  }
+  renderPosCart();
+}
+
 function updatePosTotals(subtotal) {
-  const gst = subtotal * 0.05; // 5% GST in India
+  const rate = appState.settings?.gstRate ?? 5.0;
+  const gst = subtotal * (rate / 100);
   const total = subtotal + gst;
 
-  document.getElementById('pos-subtotal').textContent = `₹${subtotal.toLocaleString('en-IN')}`;
-  document.getElementById('pos-tax').textContent = `₹${gst.toFixed(2)}`;
-  document.getElementById('pos-total').textContent = `₹${Math.round(total).toLocaleString('en-IN')}`;
+  // All amounts in whole rupees — no paise (R2-7 Fix)
+  const subEl = document.getElementById('pos-subtotal');
+  const taxEl = document.getElementById('pos-tax');
+  const totEl = document.getElementById('pos-total');
+  if (subEl) subEl.textContent = `₹${Math.round(subtotal).toLocaleString('en-IN')}`;
+  if (taxEl) taxEl.textContent = `₹${Math.round(gst).toLocaleString('en-IN')}`;
+  if (totEl) totEl.textContent = `₹${Math.round(total).toLocaleString('en-IN')}`;
 }
 
 // Order ID Sequence Fix (Fix M3)
@@ -1013,6 +1081,9 @@ function showToast(msg, type = 'info') {
   }, 3500);
 }
 
+// Daily Summary PDF — triggers native browser print dialog (R2-6 Fix)
 function exportDailyReport() {
-  showToast('Madhapur daily POS summary report generated', 'success');
+  showToast('Opening Daily POS Summary for print / Save as PDF…', 'info');
+  setTimeout(() => window.print(), 600);
 }
+

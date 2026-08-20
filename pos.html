@@ -393,17 +393,17 @@
           </div>
         </section>
 
-        <!-- VIEW 3: MENU MANAGEMENT (Real 121 Menu Items - Fixes B2) -->
+        <!-- VIEW 3: MENU MANAGEMENT -->
         <section id="view-menu" class="app-view" style="display: none;">
           <div class="page-header">
             <div class="page-title-group">
               <h1>Menu Management Catalog</h1>
-              <p>Configure products from La Sabroso's live menu (121 items), prices, and availability.</p>
+              <p id="menu-subtitle">Configure products from La Sabroso's live menu, prices, and availability.</p>
             </div>
             <div class="page-actions">
               <div class="search-box">
                 <i class="fa-solid fa-magnifying-glass search-icon"></i>
-                <input type="text" class="input-control" placeholder="Search 121 menu items..." onkeyup="filterMenuGrid(this.value)" aria-label="Search menu catalog">
+                <input type="text" class="input-control" placeholder="Search menu items..." onkeyup="filterMenuGrid(this.value)" aria-label="Search menu catalog">
               </div>
               <button class="btn btn-primary" onclick="openAddMenuModal()"><i class="fa-solid fa-plus"></i> Add Item</button>
             </div>
@@ -598,8 +598,8 @@
             <div class="card" style="padding: 16px;">
               <div style="display: flex; flex-direction: column; gap: 4px;">
                 <button class="nav-item active" style="justify-content: flex-start;">General Info</button>
-                <button class="nav-item" style="justify-content: flex-start;" onclick="showToast('Receipt Template Settings', 'info')">Receipt &amp; Taxes</button>
-                <button class="nav-item" style="justify-content: flex-start;" onclick="showToast('POS Printer Hardware', 'info')">Thermal Printers</button>
+                <button class="nav-item" style="justify-content: flex-start;" onclick="showToast('Receipt template config — demo only', 'info')">Receipt &amp; Taxes <span style="font-size:10px;color:var(--text-muted);margin-left:4px;">(demo)</span></button>
+                <button class="nav-item" style="justify-content: flex-start;" onclick="showToast('Thermal printer config — demo only', 'info')">Thermal Printers <span style="font-size:10px;color:var(--text-muted);margin-left:4px;">(demo)</span></button>
               </div>
             </div>
 
