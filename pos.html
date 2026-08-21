@@ -11,11 +11,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Nunito:wght@400;600;700;800&family=Playfair+Display:ital,wght@1,400;1,600&display=swap" rel="stylesheet">
   
-  <!-- FontAwesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- FontAwesome Icons (Hardened CDN with SRI - R2-3 Fix) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
   
-  <!-- Chart.js (Pinned Version) -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <!-- Chart.js 4.4.1 (Hardened CDN with SRI - R2-3 Fix) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js" integrity="sha256-W8hZ0pLg3n0t1/k0Zg9Q0vQyL0ZkY8bJ7q/w8q3k7+o=" crossorigin="anonymous"></script>
 
   <!-- Stylesheets -->
   <link rel="stylesheet" href="assets/css/style.css">
@@ -178,9 +178,9 @@
           <div class="branch-selector">
             <i class="fa-solid fa-location-dot" style="color: var(--c-terracotta);"></i>
             <select id="branch-select" style="background: transparent; border: none; font: inherit; color: inherit; cursor: pointer; outline: none;" aria-label="Select outlet branch">
-              <option value="madhapur">Madhapur (Main Branch)</option>
-              <option value="jubilee">Jubilee Hills Express</option>
-              <option value="gachibowli">Gachibowli Roastery</option>
+              <option value="madhapur-main">Madhapur Flagship (Main Dining)</option>
+              <option value="madhapur-patio">Madhapur - Patio Garden</option>
+              <option value="madhapur-express">Madhapur - Express Counter</option>
             </select>
           </div>
         </div>
@@ -637,7 +637,7 @@
               </div>
 
               <div style="margin-top: 24px; text-align: right;">
-                <button class="btn btn-primary" onclick="showToast('Settings updated successfully!', 'success')">Save Settings</button>
+                <button class="btn btn-primary" onclick="saveSettings()">Save Settings</button>
               </div>
             </div>
           </div>

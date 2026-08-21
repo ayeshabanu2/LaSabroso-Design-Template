@@ -1,0 +1,16 @@
+# Logs and system generated artifacts
+.system_generated/
+scratch/
+*.metadata.json
+*.log
+
+# OS & Editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Node dependencies (if any)
+node_modules/
+dist/
+build/

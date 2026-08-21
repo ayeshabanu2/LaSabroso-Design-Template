@@ -45,16 +45,16 @@ let appState = {
   currentView: 'dashboard',
   selectedBranch: 'madhapur',
   
-  // Menu State with LocalStorage Sync
-  menu: [],
+  // Menu State with LocalStorage Sync (R3-3: Pre-seeded to prevent async init visual flash)
+  menu: [...SEED_MENU_ITEMS],
 
-  // Orders State
+  // Orders State (R3-2: Totals include 5% GST to align with live KPI calculations)
   orders: [
-    { id: 'ORD-1089', customer: 'Ananya Rao', items: [{ name: 'Biscoff Cold Coffee', qty: 2, price: 340 }, { name: 'Nutella Brownie Sundae', qty: 1, price: 320 }], total: 1000, payment: 'UPI', status: 'Completed', time: '11:45 AM' },
-    { id: 'ORD-1090', customer: 'Vikram Sharma', items: [{ name: 'Chipotle Chicken Burger', qty: 1, price: 544 }, { name: 'Signature Hot Chocolate', qty: 1, price: 290 }], total: 834, payment: 'Card', status: 'Ready', time: '12:05 PM' },
-    { id: 'ORD-1091', customer: 'Priya Mehta', items: [{ name: 'Honey Lemon Pepper Chicken Tenders', qty: 1, price: 544 }], total: 544, payment: 'Cash', status: 'Preparing', time: '12:12 PM' },
-    { id: 'ORD-1092', customer: 'Arjun Reddy', items: [{ name: 'Veg Masala Mafia Pasta', qty: 2, price: 524 }], total: 1048, payment: 'UPI', status: 'New', time: '12:14 PM' },
-    { id: 'ORD-1093', customer: 'Sneha Verma', items: [{ name: 'Classic Cappuccino', qty: 2, price: 220 }], total: 440, payment: 'Card', status: 'New', time: '12:15 PM' }
+    { id: 'ORD-1089', customer: 'Ananya Rao', items: [{ name: 'Biscoff Cold Coffee', qty: 2, price: 340 }, { name: 'Nutella Brownie Sundae', qty: 1, price: 320 }], total: 1050, payment: 'UPI', status: 'Completed', time: '11:45 AM' },
+    { id: 'ORD-1090', customer: 'Vikram Sharma', items: [{ name: 'Chipotle Chicken Burger', qty: 1, price: 544 }, { name: 'Signature Hot Chocolate', qty: 1, price: 290 }], total: 876, payment: 'Card', status: 'Ready', time: '12:05 PM' },
+    { id: 'ORD-1091', customer: 'Priya Mehta', items: [{ name: 'Honey Lemon Pepper Chicken Tenders', qty: 1, price: 544 }], total: 571, payment: 'Cash', status: 'Preparing', time: '12:12 PM' },
+    { id: 'ORD-1092', customer: 'Arjun Reddy', items: [{ name: 'Veg Masala Mafia Pasta', qty: 2, price: 524 }], total: 1100, payment: 'UPI', status: 'New', time: '12:14 PM' },
+    { id: 'ORD-1093', customer: 'Sneha Verma', items: [{ name: 'Classic Cappuccino', qty: 2, price: 220 }], total: 462, payment: 'Card', status: 'New', time: '12:15 PM' }
   ],
 
   // Ingredient Inventory (Madhapur Café)
@@ -81,7 +81,16 @@ let appState = {
     { id: 3, name: 'Srinivas Rao', role: 'Shift Manager', shift: 'Full Day', status: 'Active', phone: '+91 98333 44455' }
   ],
 
-  posCart: []
+  posCart: [],
+
+  // System & POS Settings (R2-6 Fix)
+  settings: {
+    storeName: 'The Cafe La Sabroso',
+    tagline: 'Feed your spirit. Feed your belly. Feed your soul.',
+    gstRate: 5.0,
+    currency: '₹',
+    address: 'Road No. 36, Madhapur, Hyderabad, Telangana 500081'
+  }
 };
 
 // Chart.js Instances
@@ -92,6 +101,7 @@ let paymentChartInstance = null;
 
 // --- INITIALIZATION ---
 document.addEventListener('DOMContentLoaded', () => {
+  initSettingsState();
   initMenuState();
   initOrdersState();
   initInventoryState();
@@ -113,6 +123,58 @@ document.addEventListener('DOMContentLoaded', () => {
     initAnalyticsCharts();
   }
 });
+
+// --- SETTINGS STATE ENGINE (R2-6 Fix) ---
+function initSettingsState() {
+  const saved = localStorage.getItem('lasabroso_settings_v1');
+  if (saved) {
+    try {
+      appState.settings = { ...appState.settings, ...JSON.parse(saved) };
+    } catch (e) {
+      console.warn('Failed to parse saved settings:', e);
+    }
+  }
+  loadSettingsIntoForm();
+}
+
+function saveSettingsState() {
+  localStorage.setItem('lasabroso_settings_v1', JSON.stringify(appState.settings));
+}
+
+function loadSettingsIntoForm() {
+  const nameEl = document.getElementById('setting-name');
+  const tagEl = document.getElementById('setting-tagline');
+  const taxEl = document.getElementById('setting-tax');
+  const currEl = document.getElementById('setting-currency');
+
+  if (nameEl) nameEl.value = appState.settings.storeName;
+  if (tagEl) tagEl.value = appState.settings.tagline;
+  if (taxEl) taxEl.value = appState.settings.gstRate;
+  if (currEl) currEl.value = appState.settings.currency;
+}
+
+function saveSettings() {
+  const nameVal = document.getElementById('setting-name')?.value.trim();
+  const tagVal = document.getElementById('setting-tagline')?.value.trim();
+  const taxVal = parseFloat(document.getElementById('setting-tax')?.value);
+
+  if (!nameVal) {
+    showToast('Store name cannot be empty', 'warning');
+    return;
+  }
+  if (isNaN(taxVal) || taxVal < 0) {
+    showToast('Please enter a valid non-negative GST rate %', 'warning');
+    return;
+  }
+
+  appState.settings.storeName = nameVal;
+  if (tagVal) appState.settings.tagline = tagVal;
+  appState.settings.gstRate = taxVal;
+
+  saveSettingsState();
+  showToast(`Settings saved! GST rate set to ${taxVal}%`, 'success');
+  renderPosCart();
+}
 
 // --- LOCALSTORAGE PERSISTENCE (Fix M4) ---
 async function initMenuState() {
@@ -951,7 +1013,8 @@ function submitPosOrder() {
   }
 
   const subtotal = appState.posCart.reduce((sum, i) => sum + i.price * i.qty, 0);
-  const total = Math.round(subtotal * 1.05);
+  const rate = appState.settings?.gstRate ?? 5.0;
+  const total = Math.round(subtotal * (1 + rate / 100)); // R3-1 Fix: Consistent dynamic rate calculation
 
   // Sequential order ID
   const nextNum = 1094 + (appState.orders.length - 5);
