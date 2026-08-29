@@ -4,47 +4,53 @@
    ========================================================================== */
 
 :root {
-  /* Official DESIGN.md Brand Palette */
-  --c-forest: #2E5D34;          /* Primary: Headings, filled buttons, headers */
-  --c-forest-deep: #23472A;     /* Hover state, dark sections */
-  --c-cream: #FFF9E6;           /* App base background */
-  --c-parchment: #F9F3E5;       /* Card surface / alternating sections */
-  --c-butter: #FFF9D1;          /* Highlights, offer strips, badges */
-  --c-terracotta: #E57A4F;      /* Accent: prices, icons, dividers */
-  --c-terracotta-deep: #C9623A; /* Accent hover */
-  --c-mint: #D5F5E3;            /* Support: success, veg tags, badges */
-  --c-gold: #FFD700;            /* Rating stars, chef picks */
-  --c-neon-pink: #FF5C8A;       /* Neon accent */
-  --c-ink: #2B2B2B;             /* Primary text */
-  --c-gray: #6B6B6B;            /* Muted text */
+  /* Requested Color Palette Tokens */
+  --c-palette-cream: #EDE8D0;     /* #EDE8D0 Base Light Alabaster */
+  --c-palette-taupe: #BAB095;     /* #BAB095 Muted Earth Taupe */
+  --c-palette-sage: #E0EDBB;      /* #E0EDBB Soft Sage Green Surface */
+  --c-palette-gold: #D6D39A;      /* #D6D39A Warm Olive Gold Accent */
+
+  /* Brand Tokens Aligned with Palette */
+  --c-forest: #3A3828;            /* Primary: Deep olive charcoal */
+  --c-forest-deep: #25241C;       /* Hover state, dark sections */
+  --c-cream: #EDE8D0;             /* App base background (#EDE8D0) */
+  --c-parchment: #FAF8EE;         /* Elevated surface */
+  --c-butter: #E0EDBB;            /* Highlights, offer strips (#E0EDBB) */
+  --c-terracotta: #D6D39A;        /* Primary Accent (#D6D39A) */
+  --c-terracotta-deep: #BAB095;   /* Accent hover (#BAB095) */
+  --c-mint: #E0EDBB;              /* Support: success, veg tags (#E0EDBB) */
+  --c-gold: #D6D39A;              /* Rating stars, chef picks (#D6D39A) */
+  --c-neon-pink: #D6D39A;         /* Neon accent */
+  --c-ink: #25241C;               /* Primary text (High contrast charcoal) */
+  --c-gray: #6B6654;              /* Muted text */
 
   /* POS Interface Mapping */
-  --background: var(--c-cream);
-  --surface: #FFFFFF;
-  --surface-elevated: #FFFFFF;
-  --border: #EADBCE;
-  --divider: #F2E6D9;
+  --background: #EDE8D0;          /* #EDE8D0 Base */
+  --surface: #FAF8EE;             /* Clean surface */
+  --surface-elevated: #E0EDBB;    /* #E0EDBB Elevated Sage card */
+  --border: #BAB095;              /* #BAB095 Taupe Border */
+  --divider: #D6D39A;             /* #D6D39A Olive Gold Divider */
 
   --text-primary: var(--c-ink);
-  --text-secondary: #4A4A4A;
+  --text-secondary: #4A4638;
   --text-muted: var(--c-gray);
 
-  --primary: var(--c-forest);
-  --primary-hover: var(--c-forest-deep);
-  --accent: var(--c-terracotta);
-  --accent-hover: var(--c-terracotta-deep);
-  --cream: var(--c-butter);
-  --cream-light: var(--c-parchment);
+  --primary: #3A3828;
+  --primary-hover: #25241C;
+  --accent: #D6D39A;
+  --accent-hover: #BAB095;
+  --cream: #E0EDBB;
+  --cream-light: #FAF8EE;
 
   /* Semantic Status Colors */
-  --success: #2E5D34;
-  --success-bg: #D5F5E3;
-  --info: #2B5B84;
-  --info-bg: #E3F0F9;
-  --warning: #C9623A;
-  --warning-bg: #FDE8E0;
-  --danger: #B93A3A;
-  --danger-bg: #FCEBEB;
+  --success: #3A5222;
+  --success-bg: #E0EDBB;
+  --info: #3B5266;
+  --info-bg: #E0EDBB;
+  --warning: #706B33;
+  --warning-bg: #FAF8EE;
+  --danger: #8C322B;
+  --danger-bg: #F5E5E3;
 
   /* Geometry & Radius (DESIGN.md rounded specs) */
   --sidebar-width: 260px;
@@ -1138,7 +1144,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .login-left {
   flex: 1;
-  background: linear-gradient(rgba(35, 71, 42, 0.75), rgba(35, 71, 42, 0.9)), url('./hero_cafe_1786967045964.jpg') center/cover no-repeat;
+  background: linear-gradient(rgba(35, 71, 42, 0.75), rgba(35, 71, 42, 0.9)), url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=1200&auto=format&fit=crop') center/cover no-repeat;
   padding: 60px;
   display: flex;
   flex-direction: column;

@@ -19,6 +19,52 @@ function esc(str) {
     .replace(/'/g, '&#039;');
 }
 
+const getFoodImage = (item) => {
+  if (item.img && typeof item.img === 'string' && item.img.startsWith('http')) {
+    return item.img;
+  }
+  const str = ((item.name || '') + ' ' + (item.category || '') + ' ' + (item.desc || '')).toLowerCase();
+  
+  if (str.includes('pizza') || str.includes('margherita') || str.includes('pepperoni')) {
+    return 'https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=800&auto=format&fit=crop';
+  }
+  if (str.includes('burger') || str.includes('slider') || str.includes('patty')) {
+    return 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=800&auto=format&fit=crop';
+  }
+  if (str.includes('pasta') || str.includes('spaghetti') || str.includes('penne') || str.includes('alfredo') || str.includes('arrabbiata') || str.includes('macaroni') || str.includes('lasagna')) {
+    return 'https://images.unsplash.com/photo-1621996346565-e3d5d6281270?q=80&w=800&auto=format&fit=crop';
+  }
+  if (str.includes('chicken') || str.includes('tender') || str.includes('wing') || str.includes('nugget') || str.includes('brochettes')) {
+    return 'https://images.unsplash.com/photo-1562967914-608f82629710?q=80&w=800&auto=format&fit=crop';
+  }
+  if (str.includes('fish') || str.includes('prawn') || str.includes('shrimp') || str.includes('squid') || str.includes('calamari') || str.includes('seafood')) {
+    return 'https://images.unsplash.com/photo-1559737605-331879f2b57e?q=80&w=800&auto=format&fit=crop';
+  }
+  if (str.includes('fry') || str.includes('fries') || str.includes('nacho') || str.includes('croqueta') || str.includes('garlic bread') || str.includes('ring') || str.includes('bruschetta')) {
+    return 'https://images.unsplash.com/photo-1576107232684-1279f390859f?q=80&w=800&auto=format&fit=crop';
+  }
+  if (str.includes('salad') || str.includes('broccoli') || str.includes('quinoa') || str.includes('avocado') || str.includes('caesar')) {
+    return 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?q=80&w=800&auto=format&fit=crop';
+  }
+  if (str.includes('latte') || str.includes('cappuccino') || str.includes('espresso') || str.includes('coffee') || str.includes('brew') || str.includes('biscoff')) {
+    return 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=800&auto=format&fit=crop';
+  }
+  if (str.includes('chocolate') || str.includes('tea') || str.includes('chai') || str.includes('cocoa')) {
+    return 'https://images.unsplash.com/photo-1544787219-7f47ccb76574?q=80&w=800&auto=format&fit=crop';
+  }
+  if (str.includes('mojito') || str.includes('shake') || str.includes('smoothie') || str.includes('cooler') || str.includes('iced') || str.includes('soda') || str.includes('mocktail') || str.includes('drink')) {
+    return 'https://images.unsplash.com/photo-1551024709-8f23befc6f87?q=80&w=800&auto=format&fit=crop';
+  }
+  if (str.includes('ice cream') || str.includes('cake') || str.includes('brownie') || str.includes('cheesecake') || str.includes('pastry') || str.includes('sundae') || str.includes('waffle') || str.includes('nitrogen') || str.includes('dessert')) {
+    return 'https://images.unsplash.com/photo-1555507036-ab1f4038808a?q=80&w=800&auto=format&fit=crop';
+  }
+  if (str.includes('rice') || str.includes('biryani') || str.includes('curry') || str.includes('paneer') || str.includes('dal')) {
+    return 'https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?q=80&w=800&auto=format&fit=crop';
+  }
+
+  return 'https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=800&auto=format&fit=crop';
+};
+
 // --- 2. SEED MENU (16 items) — fallback if menu-data.json fetch fails ---
 const SEED_MENU_ITEMS = [
   { id: 1, category: "La Sabroso Favourites", name: "Honey Lemon Pepper Chicken Tenders", price: 544, desc: "Crispy fried chicken tenders drenched in a rich honey lemon pepper sauce", veg: false, available: true, ordersCount: 142, img: "https://dineinpetweb.gumlet.io/homewebsite/104812/thumb_17816798790_2026_06_17_12_33_43_Honey_Lemon_Pepper_chicken_Tenders.jpeg" },
@@ -32,11 +78,11 @@ const SEED_MENU_ITEMS = [
   { id: 9, category: "Burgers", name: "Chipotle Chicken Burger", price: 544, desc: "Juicy chicken patty topped with chipotle mayo and crispy lettuce.", veg: false, available: true, ordersCount: 118, img: null },
   { id: 10, category: "Pizzas", name: "Classic Margherita Pizza", price: 494, desc: "Fresh basil, rich tomato sauce, and melty mozzarella on artisan crust.", veg: true, available: true, ordersCount: 160, img: null },
   { id: 11, category: "Pizzas", name: "BBQ Chicken Pizza", price: 594, desc: "Smoky BBQ chicken, red onions, mozzarella, and cilantro.", veg: false, available: true, ordersCount: 145, img: null },
-  { id: 12, category: "Hot Beverages", name: "Signature Hot Chocolate", price: 290, desc: "Rich Belgian chocolate melted into steamed milk with marshmallow foam.", veg: true, available: true, ordersCount: 210, img: "./hero_cafe_1786967045964.jpg" },
-  { id: 13, category: "Hot Beverages", name: "Classic Cappuccino", price: 220, desc: "Double shot espresso with velvety microfoam.", veg: true, available: true, ordersCount: 195, img: "./specialty_latte_1786967372186.jpg" },
-  { id: 14, category: "Cold Beverages", name: "Biscoff Cold Coffee", price: 340, desc: "Blend of espresso, Lotus Biscoff spread, and crushed Biscoff cookies.", veg: true, available: true, ordersCount: 240, img: "./specialty_latte_1786967372186.jpg" },
-  { id: 15, category: "Desserts", name: "Liquid Nitrogen Ice Cream", price: 380, desc: "Tableside theater with fresh milk cream frozen instantly.", veg: true, available: true, ordersCount: 180, img: "./bakery_pastries_1786967443955.jpg" },
-  { id: 16, category: "Desserts", name: "Nutella Brownie Sundae", price: 320, desc: "Warm fudgy brownie topped with vanilla ice cream and warm Nutella.", veg: true, available: true, ordersCount: 165, img: "./bakery_pastries_1786967443955.jpg" }
+  { id: 12, category: "Hot Beverages", name: "Signature Hot Chocolate", price: 290, desc: "Rich Belgian chocolate melted into steamed milk with marshmallow foam.", veg: true, available: true, ordersCount: 210, img: "https://images.unsplash.com/photo-1595981267035-7b04ca84a82d?q=80&w=1000&auto=format&fit=crop" },
+  { id: 13, category: "Hot Beverages", name: "Classic Cappuccino", price: 220, desc: "Double shot espresso with velvety microfoam.", veg: true, available: true, ordersCount: 195, img: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=1000&auto=format&fit=crop" },
+  { id: 14, category: "Cold Beverages", name: "Biscoff Cold Coffee", price: 340, desc: "Blend of espresso, Lotus Biscoff spread, and crushed Biscoff cookies.", veg: true, available: true, ordersCount: 240, img: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=1000&auto=format&fit=crop" },
+  { id: 15, category: "Desserts", name: "Liquid Nitrogen Ice Cream", price: 380, desc: "Tableside theater with fresh milk cream frozen instantly.", veg: true, available: true, ordersCount: 180, img: "https://images.unsplash.com/photo-1555507036-ab1f4038808a?q=80&w=1000&auto=format&fit=crop" },
+  { id: 16, category: "Desserts", name: "Nutella Brownie Sundae", price: 320, desc: "Warm fudgy brownie topped with vanilla ice cream and warm Nutella.", veg: true, available: true, ordersCount: 165, img: "https://images.unsplash.com/photo-1555507036-ab1f4038808a?q=80&w=1000&auto=format&fit=crop" }
 ];
 
 // --- 3. STATE ENGINE ---
@@ -372,7 +418,7 @@ function renderPopularToday() {
   const topItems = [...appState.menu].sort((a, b) => b.ordersCount - a.ordersCount).slice(0, 4);
 
   container.innerHTML = topItems.map(item => {
-    const imageSrc = item.img ? esc(item.img) : './specialty_latte_1786967372186.jpg';
+    const imageSrc = getFoodImage(item);
     return `
       <div style="display: flex; align-items: center; gap: 12px; padding: 10px; border-radius: var(--radius-md); background: var(--c-parchment); border: 1px solid var(--border);">
         <img src="${imageSrc}" alt="${esc(item.name)}" loading="lazy" style="width: 44px; height: 44px; border-radius: var(--radius-sm); object-fit: cover;">
@@ -557,7 +603,7 @@ function renderMenuGrid(itemsToRender = appState.menu) {
   }
 
   container.innerHTML = itemsToRender.map(item => {
-    const imageSrc = item.img ? esc(item.img) : './specialty_latte_1786967372186.jpg';
+    const imageSrc = getFoodImage(item);
     return `
       <div class="product-card">
         <div class="product-img-container">
@@ -658,7 +704,7 @@ function handleCreateMenuItem(e) {
     veg: true,
     available: true,
     ordersCount: 0,
-    img: './specialty_latte_1786967372186.jpg'
+    img: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=1000&auto=format&fit=crop'
   };
 
   appState.menu.unshift(newItem);

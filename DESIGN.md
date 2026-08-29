@@ -15,21 +15,11 @@ warm bohemian interior, chandelier glow, macrame, neon signage.
 
 | Token | Hex | Role | Pairing rules |
 |-------|-----|------|---------------|
-| `--c-forest` | #2E5D34 | Primary. Headings, filled buttons, footer | on cream/parchment (contrast ≈7.2:1, AAA) |
-| `--c-forest-deep` | #23472A | Hover state, dark sections (events) | white text on top |
-| `--c-cream` | #FFF9E6 | Page base background | — |
-| `--c-parchment` | #F9F3E5 | Alternating section background | — |
-| `--c-butter` | #FFF9D1 | Hero card, highlights, offer strip | forest text |
-| `--c-terracotta` | #E57A4F | Accent: prices, dividers, partner accents | large text/accents only (≈3.1:1) |
-| `--c-terracotta-deep` | #C9623A | Accent hover | — |
-| `--c-mint` | #D5F5E3 | Support: badges, tags, delivery cards | forest text |
-| `--c-gold` | #FFD700 | Rating stars, chef's-pick badges | on forest/ink |
-| `--c-neon-pink` | #FF5C8A | Neon signage accent ONLY (hero sign, events) | glow layers on dark grounds |
-| `--c-ink` | #2B2B2B | Body text | on cream/parchment/butter/mint |
-| `--c-gray` | #6B6B6B | Secondary text, captions | on light grounds only |
-
-Prohibited: neon pink for body text or large fills; terracotta for body copy;
-any background outside the warm family (no pure white pages, no cool grays).
+| `--c-palette-cream` | `#EDE8D0` | Primary Base Background (Light Alabaster) | High contrast dark charcoal text |
+| `--c-palette-taupe` | `#BAB095` | Muted Earth Taupe (Borders, Secondary Accents) | Clean contrast dividers & borders |
+| `--c-palette-sage` | `#E0EDBB` | Soft Sage Green (Cards, Elevated Surfaces, Badges) | Dark charcoal text on sage cards |
+| `--c-palette-gold` | `#D6D39A` | Warm Olive Gold (Primary Accents, Active Buttons, Highlights) | Active focus rings & gold highlights |
+| `--c-ink` | `#25241C` | Primary High-Contrast Body & Title Text | On `#EDE8D0` and `#E0EDBB` surfaces |
 
 ## Typography
 
