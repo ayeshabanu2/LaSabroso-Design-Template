@@ -20,69 +20,78 @@ function esc(str) {
 }
 
 const getFoodImage = (item) => {
-  if (item.img && typeof item.img === 'string' && item.img.startsWith('http')) {
+  if (item.img && typeof item.img === 'string' && item.img.trim().length > 0) {
     return item.img;
   }
-  const str = ((item.name || '') + ' ' + (item.category || '') + ' ' + (item.desc || '')).toLowerCase();
+  const name = (item.name || '').toLowerCase();
   
-  if (str.includes('pizza') || str.includes('margherita') || str.includes('pepperoni')) {
-    return 'https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=800&auto=format&fit=crop';
-  }
-  if (str.includes('burger') || str.includes('slider') || str.includes('patty')) {
-    return 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=800&auto=format&fit=crop';
-  }
-  if (str.includes('pasta') || str.includes('spaghetti') || str.includes('penne') || str.includes('alfredo') || str.includes('arrabbiata') || str.includes('macaroni') || str.includes('lasagna')) {
-    return 'https://images.unsplash.com/photo-1621996346565-e3d5d6281270?q=80&w=800&auto=format&fit=crop';
-  }
-  if (str.includes('chicken') || str.includes('tender') || str.includes('wing') || str.includes('nugget') || str.includes('brochettes')) {
-    return 'https://images.unsplash.com/photo-1562967914-608f82629710?q=80&w=800&auto=format&fit=crop';
-  }
-  if (str.includes('fish') || str.includes('prawn') || str.includes('shrimp') || str.includes('squid') || str.includes('calamari') || str.includes('seafood')) {
-    return 'https://images.unsplash.com/photo-1559737605-331879f2b57e?q=80&w=800&auto=format&fit=crop';
-  }
-  if (str.includes('fry') || str.includes('fries') || str.includes('nacho') || str.includes('croqueta') || str.includes('garlic bread') || str.includes('ring') || str.includes('bruschetta')) {
-    return 'https://images.unsplash.com/photo-1576107232684-1279f390859f?q=80&w=800&auto=format&fit=crop';
-  }
-  if (str.includes('salad') || str.includes('broccoli') || str.includes('quinoa') || str.includes('avocado') || str.includes('caesar')) {
-    return 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?q=80&w=800&auto=format&fit=crop';
-  }
-  if (str.includes('latte') || str.includes('cappuccino') || str.includes('espresso') || str.includes('coffee') || str.includes('brew') || str.includes('biscoff')) {
-    return 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=800&auto=format&fit=crop';
-  }
-  if (str.includes('chocolate') || str.includes('tea') || str.includes('chai') || str.includes('cocoa')) {
-    return 'https://images.unsplash.com/photo-1544787219-7f47ccb76574?q=80&w=800&auto=format&fit=crop';
-  }
-  if (str.includes('mojito') || str.includes('shake') || str.includes('smoothie') || str.includes('cooler') || str.includes('iced') || str.includes('soda') || str.includes('mocktail') || str.includes('drink')) {
-    return 'https://images.unsplash.com/photo-1551024709-8f23befc6f87?q=80&w=800&auto=format&fit=crop';
-  }
-  if (str.includes('ice cream') || str.includes('cake') || str.includes('brownie') || str.includes('cheesecake') || str.includes('pastry') || str.includes('sundae') || str.includes('waffle') || str.includes('nitrogen') || str.includes('dessert')) {
-    return 'https://images.unsplash.com/photo-1555507036-ab1f4038808a?q=80&w=800&auto=format&fit=crop';
-  }
-  if (str.includes('rice') || str.includes('biryani') || str.includes('curry') || str.includes('paneer') || str.includes('dal')) {
-    return 'https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?q=80&w=800&auto=format&fit=crop';
-  }
+  // Specific dish fallbacks
+  if (name.includes('honey lemon pepper')) return 'Food/Honey Lemon Pepper Tenders.avif';
+  if (name.includes('marry me chicken')) return 'Food/Marry me chicken.avif';
+  if (name.includes('peppy paneer pizza')) return 'Food/Peppy Paneer Pizza.avif';
+  if (name.includes('peri peri chicken pizza')) return 'Food/Peri Peri Chicken Pizza.avif';
+  if (name.includes('sabroso green garden')) return 'Food/Sabroso Green Garden Veg Pizza.avif';
+  if (name.includes('chicken alfredo pizza')) return 'assets/img/dishes/chicken_alfredo_pizza.jpg';
+  if (name.includes('mutton kheema pizza')) return 'assets/img/dishes/mutton_kheema_pizza.jpg';
+  if (name.includes('veg masala mafia')) return 'Food/Veg Masala Mafia Pasta.avif';
+  if (name.includes('chicken masala mafia')) return 'assets/img/dishes/chicken_masala_mafia_pasta.jpg';
+  if (name.includes('veg arrabbiata')) return 'Food/Veg Arrabbiata Pasta.avif';
+  if (name.includes('chicken arrabbiata')) return 'assets/img/dishes/chicken_arrabbiata_pasta.jpg';
+  if (name.includes('veg alfredo pasta')) return 'Food/Veg Alfredo Pasta.avif';
+  if (name.includes('chicken alfredo pasta')) return 'assets/img/dishes/chicken_alfredo_pasta.jpg';
+  if (name.includes('veg baked pasta')) return 'Food/Veg Baked Pasta.avif';
+  if (name.includes('chicken baked pasta')) return 'assets/img/dishes/chicken_baked_pasta.jpg';
+  if (name.includes('veg aglio olio')) return 'Food/Veg Aglio Olio Pasta.avif';
+  if (name.includes('chicken aglio olio')) return 'assets/img/dishes/chicken_aglio_olio_pasta.jpg';
+  if (name.includes('chessy chicken burger') || name.includes('cheesy chicken burger')) return 'Food/Chessy Chicken Burger.avif';
+  if (name.includes('cheesy paneer burger')) return 'assets/img/dishes/cheesy_paneer_burger.jpg';
+  if (name.includes('chipotle veg burger')) return 'assets/img/dishes/chipotle_veg_burger.jpg';
+  if (name.includes('chipotle chicken burger')) return 'assets/img/dishes/chipotle_chicken_burger.jpg';
+  if (name.includes('peri peri veg burger')) return 'assets/img/dishes/peri_peri_veg_burger.jpg';
+  if (name.includes('peri peri chicken burger')) return 'assets/img/dishes/peri_peri_chicken_burger.jpg';
+  if (name.includes('veg caesar sandwich')) return 'Food/Veg Caesar Sandwich.avif';
+  if (name.includes('pesto chicken sandwich')) return 'assets/img/dishes/pesto_chicken_sandwich.jpg';
+  if (name.includes('chicken caesar sandwich')) return 'assets/img/dishes/chicken_caesar_sandwich.jpg';
+  if (name.includes('roasted tomato soup')) return 'Food/Roasted Tomato Soup With Cheese Toast.avif';
+  if (name.includes('broccoli cheddar soup')) return 'Food/Broccoli Cheddar Soup With Garlic Bread.avif';
+  if (name.includes('chicken alfredo garlic bread')) return 'Food/Chicken Alfredo Garlic Bread.avif';
+  if (name.includes('veg alfredo garlic bread')) return 'Food/Veg Alfredo Garlic Bread.avif';
+  if (name.includes('quinoa with grilled chicken')) return 'Food/Quinoa With Grilled Chicken.avif';
+  if (name.includes('chicken caesar salad')) return 'Food/Chicken Caesar Salad.avif';
+  if (name.includes('caesar salad')) return 'Food/Caesar Salad.avif';
+  if (name.includes('lotus biscoff')) return 'Food/Lotus Biscoff Cold Coffee.avif';
+  if (name.includes('french hot chocolate')) return 'Food/French Hot Chocolate.avif';
+  if (name.includes('blue berry cheese cake') || name.includes('blueberry cheesecake')) return 'Food/Blue Berry Cheese Cake.avif';
+  if (name.includes('chocolate khoma')) return 'Food/Chocolate Khoma.avif';
+  if (name.includes('cranberry coffee')) return 'Food/Cranberry Coffee.avif';
+  if (name.includes('iced mocha')) return 'Food/Iced Mocha.avif';
+  if (name.includes('matcha cold coffee')) return 'Food/Matcha Cold Coffee.avif';
+  if (name.includes('matcha latte hot')) return 'Food/Matcha Latte Hot.avif';
+  if (name.includes('nutella cold coffee')) return 'Food/Nutella Cold Coffee.avif';
+  if (name.includes('cappuccino')) return 'Food/Cappuccino.avif';
+  if (name.includes('americano')) return 'Food/Americano.avif';
 
-  return 'https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=800&auto=format&fit=crop';
+  return 'Food/Peppy Paneer Pizza.avif';
 };
 
 // --- 2. SEED MENU (16 items) — fallback if menu-data.json fetch fails ---
 const SEED_MENU_ITEMS = [
-  { id: 1, category: "La Sabroso Favourites", name: "Honey Lemon Pepper Chicken Tenders", price: 544, desc: "Crispy fried chicken tenders drenched in a rich honey lemon pepper sauce", veg: false, available: true, ordersCount: 142, img: "https://dineinpetweb.gumlet.io/homewebsite/104812/thumb_17816798790_2026_06_17_12_33_43_Honey_Lemon_Pepper_chicken_Tenders.jpeg" },
-  { id: 2, category: "La Sabroso Favourites", name: "Creamy Garlic Prawns", price: 584, desc: "Crispy fried prawns served on a bed of rich, garlicky white cream sauce.", veg: false, available: true, ordersCount: 98, img: null },
-  { id: 3, category: "La Sabroso Favourites", name: "Fish And Chips", price: 574, desc: "Fish fillets dipped in a light and crispy batter, fried to golden perfection with tartar sauce.", veg: false, available: true, ordersCount: 86, img: null },
-  { id: 4, category: "La Sabroso Favourites", name: "Veg Croqueta With Al Fungi Sauce", price: 424, desc: "Crispy croquetas made from seasonal vegetables drizzled with luxurious Al Fungi sauce.", veg: true, available: true, ordersCount: 74, img: null },
-  { id: 5, category: "La Sabroso Favourites", name: "Bang Bang Broccoli", price: 424, desc: "Crispy broccoli served with Peri Peri Bang Bang Sauce.", veg: true, available: true, ordersCount: 110, img: null },
-  { id: 6, category: "La Sabroso Favourites", name: "Veg Masala Mafia Pasta", price: 524, desc: "Pasta tossed in a Red Bell Pepper puree and cream, served with garlic bread.", veg: true, available: true, ordersCount: 135, img: "https://dineinpetweb.gumlet.io/homewebsite/104812/thumb_17816219070_2026_06_16_20_28_19_Masala_Mafia_Pasta.JPG" },
-  { id: 7, category: "Burgers", name: "Chipotle Veg Burger", price: 484, desc: "Crispy veg patty layered with fresh lettuce and smoky chipotle mayo.", veg: true, available: true, ordersCount: 92, img: "https://dineinpetweb.gumlet.io/homewebsite/104812/thumb_17818578920_2026_06_19_14_00_56_Burger.jpg" },
-  { id: 8, category: "Burgers", name: "Cheesy Paneer Burger", price: 494, desc: "Crispy paneer loaded with melty cheese, fresh lettuce, and thousand island sauce.", veg: true, available: true, ordersCount: 104, img: null },
-  { id: 9, category: "Burgers", name: "Chipotle Chicken Burger", price: 544, desc: "Juicy chicken patty topped with chipotle mayo and crispy lettuce.", veg: false, available: true, ordersCount: 118, img: null },
-  { id: 10, category: "Pizzas", name: "Classic Margherita Pizza", price: 494, desc: "Fresh basil, rich tomato sauce, and melty mozzarella on artisan crust.", veg: true, available: true, ordersCount: 160, img: null },
-  { id: 11, category: "Pizzas", name: "BBQ Chicken Pizza", price: 594, desc: "Smoky BBQ chicken, red onions, mozzarella, and cilantro.", veg: false, available: true, ordersCount: 145, img: null },
-  { id: 12, category: "Hot Beverages", name: "Signature Hot Chocolate", price: 290, desc: "Rich Belgian chocolate melted into steamed milk with marshmallow foam.", veg: true, available: true, ordersCount: 210, img: "https://images.unsplash.com/photo-1595981267035-7b04ca84a82d?q=80&w=1000&auto=format&fit=crop" },
-  { id: 13, category: "Hot Beverages", name: "Classic Cappuccino", price: 220, desc: "Double shot espresso with velvety microfoam.", veg: true, available: true, ordersCount: 195, img: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=1000&auto=format&fit=crop" },
-  { id: 14, category: "Cold Beverages", name: "Biscoff Cold Coffee", price: 340, desc: "Blend of espresso, Lotus Biscoff spread, and crushed Biscoff cookies.", veg: true, available: true, ordersCount: 240, img: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=1000&auto=format&fit=crop" },
-  { id: 15, category: "Desserts", name: "Liquid Nitrogen Ice Cream", price: 380, desc: "Tableside theater with fresh milk cream frozen instantly.", veg: true, available: true, ordersCount: 180, img: "https://images.unsplash.com/photo-1555507036-ab1f4038808a?q=80&w=1000&auto=format&fit=crop" },
-  { id: 16, category: "Desserts", name: "Nutella Brownie Sundae", price: 320, desc: "Warm fudgy brownie topped with vanilla ice cream and warm Nutella.", veg: true, available: true, ordersCount: 165, img: "https://images.unsplash.com/photo-1555507036-ab1f4038808a?q=80&w=1000&auto=format&fit=crop" }
+  { id: 1, category: "La Sabroso Favourites", name: "Honey Lemon Pepper Chicken Tenders", price: 544, desc: "Crispy fried chicken tenders drenched in a rich honey lemon pepper sauce", veg: false, available: true, ordersCount: 142, img: "Food/Honey Lemon Pepper Tenders.avif" },
+  { id: 2, category: "La Sabroso Favourites", name: "Creamy Garlic Prawns", price: 584, desc: "Crispy fried prawns served on a bed of rich, garlicky white cream sauce.", veg: false, available: true, ordersCount: 98, img: "Food/creamy-garlic-prawns.jpg" },
+  { id: 3, category: "La Sabroso Favourites", name: "Fish And Chips", price: 574, desc: "Crispy golden fish fillets dipped in artisan batter, served with house tartar sauce and seasoned fries.", veg: false, available: true, ordersCount: 86, img: "Food/fish-and-chips.webp" },
+  { id: 4, category: "La Sabroso Favourites", name: "Veg Croqueta With Al Fungi Sauce", price: 424, desc: "Crispy croquetas made from seasonal vegetables drizzled with luxurious Al Fungi sauce.", veg: true, available: true, ordersCount: 74, img: "https://images.unsplash.com/photo-1555126634-323283e090fa?q=80&w=800&auto=format&fit=crop" },
+  { id: 5, category: "La Sabroso Favourites", name: "Bang Bang Broccoli", price: 424, desc: "Crispy broccoli served with Peri Peri Bang Bang Sauce.", veg: true, available: true, ordersCount: 110, img: "https://images.unsplash.com/photo-1540420773420-3366772f4999?q=80&w=800&auto=format&fit=crop" },
+  { id: 6, category: "La Sabroso Favourites", name: "Veg Masala Mafia Pasta", price: 524, desc: "Pasta tossed in a Red Bell Pepper puree and cream, served with garlic bread.", veg: true, available: true, ordersCount: 135, img: "Food/Veg Masala Mafia Pasta.avif" },
+  { id: 7, category: "Burgers", name: "Chipotle Veg Burger", price: 484, desc: "Crispy veg patty layered with fresh lettuce and smoky chipotle mayo.", veg: true, available: true, ordersCount: 92, img: "assets/img/dishes/chipotle_veg_burger.jpg" },
+  { id: 8, category: "Burgers", name: "Cheesy Paneer Burger", price: 494, desc: "Crispy paneer loaded with melty cheese, fresh lettuce, and thousand island sauce.", veg: true, available: true, ordersCount: 104, img: "assets/img/dishes/cheesy_paneer_burger.jpg" },
+  { id: 9, category: "Burgers", name: "Chipotle Chicken Burger", price: 544, desc: "Juicy chicken patty topped with chipotle mayo and crispy lettuce.", veg: false, available: true, ordersCount: 118, img: "assets/img/dishes/chipotle_chicken_burger.jpg" },
+  { id: 10, category: "Pizzas", name: "Peppy Paneer Pizza", price: 504, desc: "Spiced paneer, crunchy bell peppers, melted mozzarella, and house herb crust.", veg: true, available: true, ordersCount: 160, img: "Food/Peppy Paneer Pizza.avif" },
+  { id: 11, category: "Pizzas", name: "Peri Peri Chicken Pizza", price: 564, desc: "Peri-peri spiced chicken, red paprika, and bubbling mozzarella.", veg: false, available: true, ordersCount: 145, img: "Food/Peri Peri Chicken Pizza.avif" },
+  { id: 12, category: "Hot Beverages", name: "French Hot Chocolate", price: 290, desc: "Thick Parisian-style dark melted chocolate.", veg: true, available: true, ordersCount: 210, img: "Food/French Hot Chocolate.avif" },
+  { id: 13, category: "Hot Beverages", name: "Classic Cappuccino", price: 220, desc: "Double shot espresso with velvety microfoam.", veg: true, available: true, ordersCount: 195, img: "Food/Cappuccino.avif" },
+  { id: 14, category: "Cold Beverages", name: "Lotus Biscoff Cold Coffee", price: 374, desc: "Blend of espresso, Lotus Biscoff spread, and crushed Biscoff cookies.", veg: true, available: true, ordersCount: 240, img: "Food/Lotus Biscoff Cold Coffee.avif" },
+  { id: 15, category: "Desserts", name: "Blueberry Cheesecake", price: 314, desc: "Velvety New York style cheesecake with slow-simmered wild blueberry compote.", veg: true, available: true, ordersCount: 180, img: "Food/Blue Berry Cheese Cake.avif" },
+  { id: 16, category: "Desserts", name: "Chocolate Khoma", price: 320, desc: "Rich molten artisan chocolate dessert.", veg: true, available: true, ordersCount: 165, img: "Food/Chocolate Khoma.avif" }
 ];
 
 // --- 3. STATE ENGINE ---

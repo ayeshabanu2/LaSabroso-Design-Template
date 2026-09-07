@@ -278,7 +278,7 @@
           </div>
 
           <!-- Sales Overview & Popular Today -->
-          <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 24px; margin-bottom: 24px;">
+          <div class="grid-2col-main-side">
             <!-- Sales Chart -->
             <div class="card" style="margin-bottom: 0;">
               <div class="card-header">
@@ -544,7 +544,7 @@
             </div>
           </div>
 
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px;">
+          <div class="grid-2col-equal">
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">Category Sales Split</h3>
@@ -564,7 +564,7 @@
             </div>
           </div>
 
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+          <div class="grid-2col-equal">
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">Payment Methods Split</h3>
@@ -594,7 +594,7 @@
             </div>
           </div>
 
-          <div style="display: grid; grid-template-columns: 240px 1fr; gap: 24px;">
+          <div class="grid-settings-layout">
             <div class="card" style="padding: 16px;">
               <div style="display: flex; flex-direction: column; gap: 4px;">
                 <button class="nav-item active" style="justify-content: flex-start;">General Info</button>
@@ -655,7 +655,7 @@
         <button class="btn btn-secondary btn-sm btn-icon-only" onclick="closeModal('modal-pos')" aria-label="Close POS sale modal"><i class="fa-solid fa-xmark"></i></button>
       </div>
 
-      <div class="modal-body" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+      <div class="modal-body pos-modal-grid">
         <div>
           <label style="display: block; font-weight: 700; margin-bottom: 8px; font-size: 12.5px;">Select Available Items</label>
           <div id="pos-items-selector" style="display: flex; flex-direction: column; gap: 8px; max-height: 320px; overflow-y: auto; padding-right: 4px;">

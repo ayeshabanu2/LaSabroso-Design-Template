@@ -1,0 +1,1101 @@
+﻿/* ==========================================================================
+   La Sabroso Cafe - Centralized Data-Driven Menu Structure (src/data/menu.js)
+   Authenticated dishes with exact pricing, categories, and dedicated imagery.
+   Easy to modify: add/remove/edit dishes without changing UI markup.
+   ========================================================================== */
+
+window.MENU_DATA = [
+    {
+        "category":  "La Sabroso Favourites",
+        "name":  "Honey Lemon Pepper Chicken Tenders",
+        "price":  544,
+        "desc":  "Crispy fried chicken tenders drenched in a rich honey lemon pepper sauce",
+        "veg":  false,
+        "img":  "Food/Honey Lemon Pepper Tenders.avif",
+        "isChefPick":  true
+    },
+    {
+        "category":  "La Sabroso Favourites",
+        "name":  "Creamy Garlic Prawns",
+        "price":  584,
+        "desc":  "Crispy fried prawns served on a bed of rich, garlicky white cream sauce.",
+        "veg":  false,
+        "img":  "Food/creamy-garlic-prawns.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "La Sabroso Favourites",
+        "name":  "Fish And Chips",
+        "price":  574,
+        "desc":  "Crispy golden fish fillets dipped in artisan batter, served with house tartar sauce and seasoned fries.",
+        "veg":  false,
+        "img":  "Food/fish-and-chips.webp",
+        "isChefPick":  false
+    },
+    {
+        "category":  "La Sabroso Favourites",
+        "name":  "Veg Croqueta With Al Fungi Sauce",
+        "price":  424,
+        "desc":  "crispy croquetas are made from a savory blend of seasonal vegetables and herbs and Drizzled with our luxurious Al Fungi sauce.",
+        "veg":  true,
+        "img":  "assets/img/dishes/veg_croqueta_fungi.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "La Sabroso Favourites",
+        "name":  "Bang Bang Brocolli",
+        "price":  424,
+        "desc":  "crispy broccoli served with Peri Peri Bang Bang Sauce.",
+        "veg":  true,
+        "img":  "assets/img/dishes/bang_bang_broccoli.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "La Sabroso Favourites",
+        "name":  "Mushroom Stroganoff",
+        "price":  514,
+        "desc":  "Sautéed button mushrooms in a velvety sour cream and herb sauce served with buttered rice.",
+        "veg":  true,
+        "img":  "assets/img/dishes/mushroom_stroganoff.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "La Sabroso Favourites",
+        "name":  "Curry Leaf Chicken With Corriander Rice",
+        "price":  554,
+        "desc":  "Tender pieces of chicken are marinated and cooked in a fragrant curry leaf-infused sauce, and served with Corriander Rice",
+        "veg":  false,
+        "img":  "Food/Curry Leaf Chicken With Corriander Rice.avif",
+        "isChefPick":  false
+    },
+    {
+        "category":  "La Sabroso Favourites",
+        "name":  "Quinoa With Grilled Chicken",
+        "price":  594,
+        "desc":  "Nutrient-rich quinoa tossed with sautéed seasonal vegetables and tender grilled chicken breast.",
+        "veg":  false,
+        "img":  "Food/Quinoa With Grilled Chicken.avif",
+        "isChefPick":  true
+    },
+    {
+        "category":  "La Sabroso Favourites",
+        "name":  "Veg Masala Mafia Pasta",
+        "price":  524,
+        "desc":  "pasta tossed in a Red Bell Pepper puree and cream, and served with garlic bread.",
+        "veg":  true,
+        "img":  "Food/Veg Masala Mafia Pasta.avif",
+        "isChefPick":  true
+    },
+    {
+        "category":  "La Sabroso Favourites",
+        "name":  "Chicken Masala Mafia Pasta",
+        "price":  574,
+        "desc":  "pasta tossed in a Red Bell Pepper Puree and cream and served with garlic bread.",
+        "veg":  false,
+        "img":  "assets/img/dishes/chicken_masala_mafia_pasta.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Burgers",
+        "name":  "Chipotle Veg Burger",
+        "price":  484,
+        "desc":  "A crispy veg patty layered with fresh lettuce, and a smoky chipotle mayo",
+        "veg":  true,
+        "img":  "assets/img/dishes/chipotle_veg_burger.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Burgers",
+        "name":  "Cheesy Paneer Burger",
+        "price":  494,
+        "desc":  "Crispy paneer loaded with melty cheese, fresh lettuce, and a creamy thousand island sauce, all hugged by a soft, toasted bun.",
+        "veg":  true,
+        "img":  "assets/img/dishes/cheesy_paneer_burger.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Burgers",
+        "name":  "Chipotle Chicken Burger",
+        "price":  510,
+        "desc":  "A crispy veg Chicken layered with fresh lettuce, and a smoky chipotle mayo",
+        "veg":  false,
+        "img":  "assets/img/dishes/chipotle_chicken_burger.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Burgers",
+        "name":  "Peri Peri Veg Burger",
+        "price":  504,
+        "desc":  "A crispy veg patty layered with fresh lettuce, and a peri peri mayo and tarte sauce",
+        "veg":  true,
+        "img":  "assets/img/dishes/peri_peri_veg_burger.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Burgers",
+        "name":  "Peri Peri Chicken Burger",
+        "price":  524,
+        "desc":  "A crispy Chicken layered with fresh lettuce, and a peri peri mayo and tarte sauce",
+        "veg":  false,
+        "img":  "assets/img/dishes/peri_peri_chicken_burger.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Burgers",
+        "name":  "Chessy Chicken Burger",
+        "price":  524,
+        "desc":  "Crispy chicken loaded with melty cheese, fresh lettuce, and a creamy thousand island sauce, all hugged by a soft, toasted bun.",
+        "veg":  false,
+        "img":  "Food/Chessy Chicken Burger.avif",
+        "isChefPick":  true
+    },
+    {
+        "category":  "Soups",
+        "name":  "Roasted Tomato Soup With Cheese Toast",
+        "price":  304,
+        "desc":  "Slow-Roasted Tomatoes Blended With Garlic, Onions, And Fresh Basil For A Smooth, Comforting Classic Soup.",
+        "veg":  true,
+        "img":  "Food/Roasted Tomato Soup With Cheese Toast.avif",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Soups",
+        "name":  "Broccoli Cheddar Soup With Garlic Bread",
+        "price":  304,
+        "desc":  "This Velvety Soup Blends Broccoli, Cheddar, A Hint Of Cream And Lightly Seasoned Makes It Irresistibly Cheesy.",
+        "veg":  true,
+        "img":  "Food/Broccoli Cheddar Soup With Garlic Bread.avif",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Soups",
+        "name":  "Chicken Broccoli Cheddar Soup With Garlic Bread",
+        "price":  344,
+        "desc":  "This Velvety Soup Blends Broccoli, Cheddar,A Hint Of Cream And Lightly Seasoned Makes It Irresistibly Cheesy.",
+        "veg":  false,
+        "img":  "assets/img/dishes/chicken_broccoli_soup.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Quick Bites",
+        "name":  "French Fries",
+        "price":  304,
+        "desc":  "Crispy, Golden, And Perfectly Salted",
+        "veg":  true,
+        "img":  "assets/img/dishes/french_fries.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Quick Bites",
+        "name":  "Chicken Alfredo Garlic Bread",
+        "price":  424,
+        "desc":  "Golden Garlic Bread Topped With A Creamy, Velvety Alfredo Sauce And Paired With Tender, Grilled Chicken.",
+        "veg":  false,
+        "img":  "Food/Chicken Alfredo Garlic Bread.avif",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Quick Bites",
+        "name":  "Peri Peri French Fries",
+        "price":  324,
+        "desc":  "Crispy fries tossed in smoky, spicy peri-peri seasoning.",
+        "veg":  true,
+        "img":  "assets/img/dishes/peri_peri_french_fries.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Quick Bites",
+        "name":  "Veg Alfredo Garlic Bread",
+        "price":  374,
+        "desc":  "Golden Garlic Bread Topped With A Creamy, Velvety Alfredo Sauce",
+        "veg":  true,
+        "img":  "Food/Veg Alfredo Garlic Bread.avif",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Veg Starters",
+        "name":  "Chilli Basil Paneer",
+        "price":  394,
+        "desc":  "Paneer Tossed With colourfull Bell peppers, In A Bold, Spicy Garlic-Basil Sauce.",
+        "veg":  true,
+        "img":  "assets/img/dishes/chilli_basil_paneer.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Veg Starters",
+        "name":  "Bang Bang Broccoli",
+        "price":  424,
+        "desc":  "crispy broccoli served with Peri Peri Bang Bang Sauce.",
+        "veg":  true,
+        "img":  "assets/img/dishes/bang_bang_broccoli.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Veg Starters",
+        "name":  "Crispy Rissoto Balls",
+        "price":  454,
+        "desc":  "Creamy Risotto Infused With Rich Cheese, Herbs And Served With Rich Creamy Sauce.",
+        "veg":  true,
+        "img":  "assets/img/dishes/crispy_risotto_balls.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Veg Starters",
+        "name":  "Jalapeno Popper Croquettes",
+        "price":  444,
+        "desc":  "Crisp golden crust on the outside, molten cheddar and cream cheese inside with smoky jalapeño peppers.",
+        "veg":  true,
+        "img":  "Food/jalapeno-popper-croquettes.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Veg Starters",
+        "name":  "Rolling In With The Ravioli",
+        "price":  464,
+        "desc":  "Ravioli tossed in a luscious cream sauce with sweet cherry tomatoes and rich tomato paste.",
+        "veg":  true,
+        "img":  "assets/img/dishes/rolling_ravioli.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Non Veg Starters",
+        "name":  "Parmesan Crumb Fried Chicken",
+        "price":  494,
+        "desc":  "Tender Chicken Breasts Coated with Crunchy Blend Of Panko Breadcrumbs , fried And topped with Parmesan Cheese.",
+        "veg":  false,
+        "img":  "assets/img/dishes/parmesan_crumb_chicken.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Non Veg Starters",
+        "name":  "Mountain Fire Chicken",
+        "price":  514,
+        "desc":  "Tender Chicken Marinated In A Zesty Blend Of Spices And Tossed In Our Signature Spicy Sauce.",
+        "veg":  false,
+        "img":  "assets/img/dishes/mountain_fire_chicken.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Non Veg Starters",
+        "name":  "Honey Lemon Pepper Tenders",
+        "price":  544,
+        "desc":  "Crispy Fried Chicken Tenders Drenched In A Rich Honey Lemon Pepper Sauce",
+        "veg":  false,
+        "img":  "Food/Honey Lemon Pepper Tenders.avif",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Non Veg Starters",
+        "name":  "Fish And Chips",
+        "price":  574,
+        "desc":  "Crispy golden fish fillets dipped in artisan batter, served with house tartar sauce and seasoned fries.",
+        "veg":  false,
+        "img":  "Food/fish-and-chips.webp",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Non Veg Starters",
+        "name":  "Creamy Garlic Prawns",
+        "price":  584,
+        "desc":  "Crispy fried prawns served on a bed of rich, garlicky white cream sauce.",
+        "veg":  false,
+        "img":  "Food/creamy-garlic-prawns.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Momos",
+        "name":  "Veg Steam Momos",
+        "price":  324,
+        "desc":  "Pillowy soft dumplings filled with garden vegetables, delicately steamed and served with spicy red chili chutney.",
+        "veg":  true,
+        "img":  "Food/veg-momos.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Momos",
+        "name":  "Chicken Steam Momos",
+        "price":  364,
+        "desc":  "Succulent minced chicken seasoned with aromatic herbs in tender steamed dumplings with chili-garlic dip.",
+        "veg":  false,
+        "img":  "Food/chicken-momos.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Momos",
+        "name":  "Veg Fried Momos",
+        "price":  354,
+        "desc":  "Golden crispy fried dumplings packed with fresh seasoned vegetables and served with spicy dipping sauce.",
+        "veg":  true,
+        "img":  "Food/fried-momos.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Momos",
+        "name":  "Chicken Fried Momos",
+        "price":  384,
+        "desc":  "Juicy spiced minced chicken encased in a crunchy golden-fried shell with fiery schezwan dip.",
+        "veg":  false,
+        "img":  "Food/fried-momos.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Momos",
+        "name":  "Veg Jhol Momos",
+        "price":  394,
+        "desc":  "Steamed vegetable momos immersed in a rich spiced peanut-sesame broth topped with chili oil.",
+        "veg":  true,
+        "img":  "Food/jhol-momos.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Momos",
+        "name":  "Chicken Jhol Momos",
+        "price":  424,
+        "desc":  "Steamed chicken momos served in a fragrant golden sesame-tomato jhol gravy with herbs and chili oil.",
+        "veg":  false,
+        "img":  "Food/jhol-momos.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Veg Pasta",
+        "name":  "Veg Arrabbiata Pasta",
+        "price":  494,
+        "desc":  "Pasta Tossed In A Vibrant Tomato Sauce Infused With Garlic, Fresh Basil And Parmesan Cheese, Offers A Spicy And Tangy Flavor.",
+        "veg":  true,
+        "img":  "Food/Veg Arrabbiata Pasta.avif",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Veg Pasta",
+        "name":  "Veg Alfredo Pasta",
+        "price":  504,
+        "desc":  "Pasta Is Generously Coated In A Rich And Velvety Alfredo Sauce Made From Butter, Heavy Cream, And Freshly Grated Parmesan Cheese",
+        "veg":  true,
+        "img":  "Food/Veg Alfredo Pasta.avif",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Veg Pasta",
+        "name":  "Veg Masala Mafia Pasta",
+        "price":  524,
+        "desc":  "Pasta Tossed In A Red Bell Pepper Puree Sauce, White Sauce And Served With Garlic Bread.",
+        "veg":  true,
+        "img":  "Food/Veg Masala Mafia Pasta.avif",
+        "isChefPick":  true
+    },
+    {
+        "category":  "Veg Pasta",
+        "name":  "Veg Aglio Olio Pasta",
+        "price":  524,
+        "desc":  "Spaghetti Tossed In A Fragrant Garlic And Olive Oil With A Pinch Of Chili Flakes And Loaded With Fresh Green Veggies.",
+        "veg":  true,
+        "img":  "Food/Veg Aglio Olio Pasta.avif",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Veg Pasta",
+        "name":  "Veg Baked Pasta",
+        "price":  574,
+        "desc":  "Pasta Tossed In A Pink Sauce And Baked To Perfection.",
+        "veg":  true,
+        "img":  "Food/Veg Baked Pasta.avif",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Non Veg Pasta",
+        "name":  "Chicken Arrabbiata Pasta",
+        "price":  544,
+        "desc":  "Pasta and Chicken Tossed In A Vibrant Tomato Sauce Infused With Garlic, Fresh Basil And Parmesan Cheese, Offers A Spicy And Tangy Flavor.",
+        "veg":  false,
+        "img":  "assets/img/dishes/chicken_arrabbiata_pasta.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Non Veg Pasta",
+        "name":  "Chicken Alfredo Pasta",
+        "price":  554,
+        "desc":  "Pasta and chicken Is Generously Coated In A Rich And Velvety Alfredo Sauce Made From Butter, Heavy Cream, And Freshly Grated Parmesan Cheese",
+        "veg":  false,
+        "img":  "assets/img/dishes/chicken_alfredo_pasta.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Non Veg Pasta",
+        "name":  "Chicken Masala Mafia Pasta",
+        "price":  574,
+        "desc":  "Pasta and chicken Tossed In A Red Bell Pepper Puree Sauce, White Sauce And Served With Garlic Bread.",
+        "veg":  false,
+        "img":  "assets/img/dishes/chicken_masala_mafia_pasta.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Non Veg Pasta",
+        "name":  "Chicken Aglio Olio Pasta",
+        "price":  574,
+        "desc":  "Spaghetti Tossed In A Fragrant Garlic And Olive Oil With A Pinch Of Chili Flakes And Loaded With chicken and Fresh Green Veggies.",
+        "veg":  false,
+        "img":  "assets/img/dishes/chicken_aglio_olio_pasta.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Non Veg Pasta",
+        "name":  "Chicken Baked Pasta",
+        "price":  614,
+        "desc":  "Pasta and chicken Tossed In A Pink Sauce And Baked To Perfection.",
+        "veg":  false,
+        "img":  "assets/img/dishes/chicken_baked_pasta.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "pizza\u0027s ( Thin-Crust )",
+        "name":  "Peppy Paneer Pizza",
+        "price":  504,
+        "desc":  "Signature Desi-style pizza topped with paneer cubes , basil , red paprika, and bell peppers.",
+        "veg":  true,
+        "img":  "Food/Peppy Paneer Pizza.avif",
+        "isChefPick":  true
+    },
+    {
+        "category":  "pizza\u0027s ( Thin-Crust )",
+        "name":  "Sabroso Green Garden Veg Pizza",
+        "price":  524,
+        "desc":  "A veggie lover\u0027s dream topped with broccoli, basil , baby corn , mushroom , spinach and bell peppers.",
+        "veg":  true,
+        "img":  "Food/Sabroso Green Garden Veg Pizza.avif",
+        "isChefPick":  false
+    },
+    {
+        "category":  "pizza\u0027s ( Thin-Crust )",
+        "name":  "Chicken Alfredo Pizza",
+        "price":  574,
+        "desc":  "Signature chicken delight topped with grilled chicken, basil , bell peppers and topped with white creamy alfredo sauce.",
+        "veg":  false,
+        "img":  "assets/img/dishes/chicken_alfredo_pizza.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "pizza\u0027s ( Thin-Crust )",
+        "name":  "Mutton Kheema Pizza",
+        "price":  624,
+        "desc":  "Crispy, thin artisan crust generously topped with spiced mutton kheema and bubbling melted cheese, baked to golden perfection for a rich, savory indulgence.",
+        "veg":  false,
+        "img":  "assets/img/dishes/mutton_kheema_pizza.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "pizza\u0027s ( Thin-Crust )",
+        "name":  "Peri Peri Chicken Pizza",
+        "price":  550,
+        "desc":  "Spicy chicken pizza topped with peri peri chicken , basil and bell peppers.",
+        "veg":  false,
+        "img":  "Food/Peri Peri Chicken Pizza.avif",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Focaccia Sandwiches",
+        "name":  "Veg Caesar Sandwich",
+        "price":  494,
+        "desc":  "Soft focaccia bread stacked with a crispy veg patty, fresh lettuce, and a peri peri dressing.",
+        "veg":  true,
+        "img":  "Food/Veg Caesar Sandwich.avif",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Focaccia Sandwiches",
+        "name":  "Pesto Chicken Sandwich",
+        "price":  524,
+        "desc":  "Toasty focaccia filled with crispy chicken, fresh letuce and creamy pesto sauce dressing",
+        "veg":  false,
+        "img":  "assets/img/dishes/pesto_chicken_sandwich.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Focaccia Sandwiches",
+        "name":  "Chicken Caesar Sandwich",
+        "price":  524,
+        "desc":  "Soft focaccia bread stacked with a crispy chicken , fresh lettuce, and a peri peri dressing.",
+        "veg":  false,
+        "img":  "assets/img/dishes/chicken_caesar_sandwich.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Healthy Meals",
+        "name":  "Arrabbiata Grilled Paneer Bowl",
+        "price":  524,
+        "desc":  "Grilled Paneer Served With Sauted Broccoli And Ararbbiata Pasta.",
+        "veg":  true,
+        "img":  "assets/img/dishes/arrabbiata_paneer_bowl.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Healthy Meals",
+        "name":  "Arrabbiata Grilled Chicken Bowl",
+        "price":  574,
+        "desc":  "Grilled Chicken Served With Sauted Broccoli And Arrabbiata Pasta.",
+        "veg":  false,
+        "img":  "assets/img/dishes/arrabbiata_chicken_bowl.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Healthy Meals",
+        "name":  "Quinoa With Grilled Paneer",
+        "price":  574,
+        "desc":  "Nutrient-rich quinoa tossed with sautéed seasonal vegetables and grilled chicken.",
+        "veg":  true,
+        "img":  "assets/img/dishes/quinoa_with_grilled_paneer.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Healthy Meals",
+        "name":  "Quinoa With Grilled Chicken",
+        "price":  594,
+        "desc":  "Nutrient-rich quinoa tossed with sautéed seasonal vegetables and tender grilled chicken breast.",
+        "veg":  false,
+        "img":  "Food/Quinoa With Grilled Chicken.avif",
+        "isChefPick":  true
+    },
+    {
+        "category":  "Main Course Veg",
+        "name":  "Grilled Paneer In Pink Sauce",
+        "price":  514,
+        "desc":  "Herb Rice Served With Grilled Paneer And Tangy, Spicy Pink Sauce Makes It A Delightful Vegetarian Dish That",
+        "veg":  true,
+        "img":  "assets/img/dishes/grilled_paneer_pink_sauce.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Main Course Veg",
+        "name":  "Mushroom Stroganoff",
+        "price":  514,
+        "desc":  "Sautéed button mushrooms in a velvety sour cream and herb sauce served with buttered rice.",
+        "veg":  true,
+        "img":  "assets/img/dishes/mushroom_stroganoff.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Main Course Veg",
+        "name":  "Spicy Mozzarella Rissoto",
+        "price":  524,
+        "desc":  "Classic Italian Dish Made With Arborio Rice Simmered In Rich Creamy Tomato Sauce.",
+        "veg":  true,
+        "img":  "assets/img/dishes/spicy_mozzarella_risotto.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Main Course Veg",
+        "name":  "Creamy Italian Rice With Exotic Vegetables",
+        "price":  524,
+        "desc":  "rice cooked in rich and creamy red sauce infused with Italian herbs and a hint of garlic and Topped with juicy exotic vegetables",
+        "veg":  true,
+        "img":  "assets/img/dishes/creamy_italian_rice_exotic_veg.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Main Course Veg",
+        "name":  "Curry Leaf Paneer Bowl With Corriander Rice",
+        "price":  524,
+        "desc":  "Tender paneer infused with aromatic curry leaves paste, served with fragrant coriander riceâ€”a luxurious, wholesome bowl of flavor.",
+        "veg":  true,
+        "img":  "assets/img/dishes/curry_leaf_paneer_bowl.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Main Course Non Veg",
+        "name":  "Curry Leaf Chicken With Corriander Rice",
+        "price":  554,
+        "desc":  "Tender Pieces Of Chicken Are Marinated And Cooked In A Fragrant Curry Leaf-Infused Sauce, And Served With Coriander Rice",
+        "veg":  false,
+        "img":  "Food/Curry Leaf Chicken With Corriander Rice.avif",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Main Course Non Veg",
+        "name":  "Marry Me Chicken",
+        "price":  594,
+        "desc":  "Tender, Juicy Chicken Breasts and mushroom Are Cooked To Perfection And Smothered In A Creamy Sun-Dried Tomato And Basil Sauce.",
+        "veg":  false,
+        "img":  "Food/Marry me chicken.avif",
+        "isChefPick":  true
+    },
+    {
+        "category":  "Main Course Non Veg",
+        "name":  "Chicken Stroganoff",
+        "price":  594,
+        "desc":  "Tender sliced chicken sautéed with fresh button mushrooms and simmered in a velvety sour cream stroganoff sauce with buttered herb rice.",
+        "veg":  false,
+        "img":  "assets/img/dishes/chicken_stroganoff.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Main Course Non Veg",
+        "name":  "Tuscan Chicken",
+        "price":  604,
+        "desc":  "Tuscan Chicken Is An Italian Inspired Dish Consisting Of Chicken In A Creamy Sauce Flavoured With Parmesan Cheese, Garlic, mushroom And Spinach.",
+        "veg":  false,
+        "img":  "assets/img/dishes/tuscan_chicken.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Main Course Non Veg",
+        "name":  "Creamy Italian Rice With Stuffed Chicken Cheese Rolls",
+        "price":  604,
+        "desc":  "Rice Cooked In Rich And Creamy Red Sauce Infused With Italian Herbs And A Hint Of Garlic And Topped With Juicy stuffed Chicken rolls",
+        "veg":  false,
+        "img":  "assets/img/dishes/creamy_italian_rice_chicken_rolls.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Main Course Non Veg",
+        "name":  "Creamy Italian Rice With Crispy Prawns",
+        "price":  654,
+        "desc":  "Creamy Italian risotto rice topped with succulent crispy garlic prawns.",
+        "veg":  false,
+        "img":  "assets/img/dishes/creamy_italian_rice_crispy_prawns.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Main Course Non Veg",
+        "name":  "Creamy Italian Rice With Meat Balls",
+        "price":  674,
+        "desc":  "Rice Cooked In Rich And Creamy Red Sauce Infused With Italian Herbs And A Hint Of Garlic And Topped With Crispy Meat Balls.",
+        "veg":  false,
+        "img":  "assets/img/dishes/creamy_italian_rice_meatballs.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Main Course Non Veg",
+        "name":  "Spicy Mozzarella Rissoto With Meat Balls",
+        "price":  674,
+        "desc":  "Classic Italian Dish Made With Arborio Rice Simmered In A Rich Creamy tomato Sauce And Topped With Crispy Meat Balls.",
+        "veg":  false,
+        "img":  "assets/img/dishes/spicy_mozzarella_risotto_meatballs.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Hot Coffee",
+        "name":  "Cappuccino",
+        "price":  274,
+        "desc":  "Perfect balance of espresso, steamed milk and frothed milk",
+        "veg":  true,
+        "img":  "Food/Cappuccino.avif",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Hot Coffee",
+        "name":  "Cafe Latte",
+        "price":  274,
+        "desc":  "Espresso and steamed milk, topped with a thin layer of milk foam.",
+        "veg":  true,
+        "img":  "assets/img/dishes/cafe_latte.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Hot Coffee",
+        "name":  "Cafe Mocha",
+        "price":  294,
+        "desc":  "Espresso, chocolate, and steamed milk come together in this sweet, creamy favorite.",
+        "veg":  true,
+        "img":  "assets/img/dishes/cafe_mocha.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Hot Coffee",
+        "name":  "Espresso",
+        "price":  184,
+        "desc":  "Espresso is a delicious concentrated form of coffee, served in shots.",
+        "veg":  true,
+        "img":  "assets/img/dishes/espresso.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Hot Coffee",
+        "name":  "Americano",
+        "price":  255,
+        "desc":  "Espresso and hot water. Pure coffee, no frills.",
+        "veg":  true,
+        "img":  "Food/Americano.avif",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Hot Coffee",
+        "name":  "Caramel Mocha",
+        "price":  314,
+        "desc":  "Sweet caramel meets rich mocha and smooth espresso.",
+        "veg":  true,
+        "img":  "assets/img/dishes/caramel_mocha.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Hot Coffee",
+        "name":  "Green Tea",
+        "price":  184,
+        "desc":  "Light, soothing, and aromatic.",
+        "veg":  true,
+        "img":  "assets/img/dishes/green_tea.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Hot Coffee",
+        "name":  "Matcha Latte Hot",
+        "price":  324,
+        "desc":  "Premium matcha blended with steamed milk for a comforting, luxurious cup.",
+        "veg":  true,
+        "img":  "Food/Matcha Latte Hot.avif",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Hot Coffee",
+        "name":  "Hazelnut Latte",
+        "price":  304,
+        "desc":  "Hazelnut and steamed milk, topped with a thin layer of milk foam.",
+        "veg":  true,
+        "img":  "assets/img/dishes/hazelnut_latte.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Desserts",
+        "name":  "Cheese Cake",
+        "price":  284,
+        "desc":  "Velvety, creamy cheesecake with a buttery, delicate crustâ€”a timeless indulgence that melts in your mouth.",
+        "veg":  true,
+        "img":  "assets/img/dishes/cheese_cake.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Desserts",
+        "name":  "Lava Mud Cheese Cake",
+        "price":  324,
+        "desc":  "Decadent cheesecake infused with Nutella, crowned with a silky chocolate-hazelnut finishâ€”pure indulgence in every bite.",
+        "veg":  true,
+        "img":  "assets/img/dishes/lava_mud_cheese_cake.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Desserts",
+        "name":  "Blue Berry Cheese Cake",
+        "price":  314,
+        "desc":  "Creamy cheesecake adorned with vibrant blueberry compote, a luxurious burst of fruity sweetness.",
+        "veg":  true,
+        "img":  "Food/Blue Berry Cheese Cake.avif",
+        "isChefPick":  true
+    },
+    {
+        "category":  "Desserts",
+        "name":  "French Hot Chocolate",
+        "price":  324,
+        "desc":  "French hot chocolate with coffee is a rich, creamy drink made with dark chocolate and a shot of strong coffee.",
+        "veg":  true,
+        "img":  "Food/French Hot Chocolate.avif",
+        "isChefPick":  true
+    },
+    {
+        "category":  "Desserts",
+        "name":  "Affogato",
+        "price":  344,
+        "desc":  "Rich espresso poured over luscious ice cream, balancing bold coffee flavors with creamy sweetnessâ€”a pure sensory indulgence.",
+        "veg":  true,
+        "img":  "assets/img/dishes/affogato.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Desserts",
+        "name":  "Chocolate Khoma",
+        "price":  324,
+        "desc":  "Rich decadent chocolate dessert with velvety layers and dark cocoa glaze.",
+        "veg":  true,
+        "img":  "Food/Chocolate Khoma.avif",
+        "isChefPick":  false
+    },
+    {
+        "category":  "iced cofffee",
+        "name":  "Cranberry Coffee",
+        "price":  314,
+        "desc":  "Chilled espresso kissed with a hint of tangy cranberry, creating a refreshingly sophisticated sip.",
+        "veg":  true,
+        "img":  "Food/Cranberry Coffee.avif",
+        "isChefPick":  false
+    },
+    {
+        "category":  "iced cofffee",
+        "name":  "Iced Latte",
+        "price":  324,
+        "desc":  "Smooth, creamy espresso melded with chilled milk for a refreshing, modern classic.",
+        "veg":  true,
+        "img":  "assets/img/dishes/iced_latte.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "iced cofffee",
+        "name":  "Iced Coffee",
+        "price":  324,
+        "desc":  "Robust coffee served over ice, silky and bold with every sip.",
+        "veg":  true,
+        "img":  "assets/img/dishes/iced_coffee.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "iced cofffee",
+        "name":  "Spanish Latte",
+        "price":  324,
+        "desc":  "Iced espresso luxuriously layered with sweet condensed milk for a creamy, velvety delight.",
+        "veg":  true,
+        "img":  "assets/img/dishes/spanish_latte.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "iced cofffee",
+        "name":  "Iced Americano",
+        "price":  294,
+        "desc":  "Bold espresso diluted over ice, crisp, clean, and refreshingly intense.",
+        "veg":  true,
+        "img":  "assets/img/dishes/iced_americano.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "iced cofffee",
+        "name":  "Iced Mocha",
+        "price":  324,
+        "desc":  "Rich chocolate and chilled espresso combine into a decadent, smooth indulgence.",
+        "veg":  true,
+        "img":  "Food/Iced Mocha.avif",
+        "isChefPick":  false
+    },
+    {
+        "category":  "iced cofffee",
+        "name":  "Matcha Latte Iced",
+        "price":  355,
+        "desc":  "Premium matcha blended with chilled milk, vibrant, smooth, and subtly sweetâ€”a refreshing green delight.",
+        "veg":  true,
+        "img":  "assets/img/dishes/matcha_latte_iced.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Signature Cold Coffee",
+        "name":  "Classic Cold Coffee",
+        "price":  344,
+        "desc":  "Smooth, creamy, perfectly chilledâ€”our signature cold coffee is a timeless indulgence.",
+        "veg":  true,
+        "img":  "assets/img/dishes/classic_cold_coffee.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Signature Cold Coffee",
+        "name":  "Caramel Cold Coffee",
+        "price":  354,
+        "desc":  "Cold coffee luxuriously drizzled with golden caramel, creating a sweet and sophisticated treat.",
+        "veg":  true,
+        "img":  "assets/img/dishes/caramel_cold_coffee.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Signature Cold Coffee",
+        "name":  "Lotus Biscoff Cold Coffee",
+        "price":  374,
+        "desc":  "Signature cold coffee infused with nutty, caramelized Lotus Biscoff, layered with creamy richness.",
+        "veg":  true,
+        "img":  "Food/Lotus Biscoff Cold Coffee.avif",
+        "isChefPick":  true
+    },
+    {
+        "category":  "Signature Cold Coffee",
+        "name":  "Chocolate Cold Coffee",
+        "price":  364,
+        "desc":  "Velvety chocolate and chilled espresso blend into an indulgent, luscious sip.",
+        "veg":  true,
+        "img":  "assets/img/dishes/chocolate_cold_coffee.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Signature Cold Coffee",
+        "name":  "Nutella Cold Coffee",
+        "price":  384,
+        "desc":  "Creamy, rich cold coffee infused with Nutella for a heavenly chocolate-hazelnut experience.",
+        "veg":  true,
+        "img":  "Food/Nutella Cold Coffee.avif",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Signature Cold Coffee",
+        "name":  "Matcha Cold Coffee",
+        "price":  394,
+        "desc":  "Artisanal fusion of finely ground ceremonial Japanese matcha and chilled espresso poured over cold milk.",
+        "veg":  true,
+        "img":  "Food/Matcha Cold Coffee.avif",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Cold Beverages",
+        "name":  "Blue Berry Mojito",
+        "price":  324,
+        "desc":  "Sweet blueberries, refreshing mint, and sparkling soda.",
+        "veg":  true,
+        "img":  "assets/img/dishes/blueberry_mojito.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Cold Beverages",
+        "name":  "Strawberry Mojito",
+        "price":  324,
+        "desc":  "Juicy strawberries meet zesty mint over sparkling refreshment.",
+        "veg":  true,
+        "img":  "assets/img/dishes/strawberry_mojito.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Cold Beverages",
+        "name":  "Fresh Lime Soda",
+        "price":  284,
+        "desc":  "Crisp, invigorating, lightly sweetened refreshment.",
+        "veg":  true,
+        "img":  "assets/img/dishes/fresh_lime_soda.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Cold Beverages",
+        "name":  "Sprite",
+        "price":  174,
+        "desc":  "Chilled, classic soft drink.",
+        "veg":  true,
+        "img":  "assets/img/dishes/sprite.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Cold Beverages",
+        "name":  "Coke",
+        "price":  174,
+        "desc":  "Chilled, classic soft drink.",
+        "veg":  true,
+        "img":  "assets/img/dishes/coke.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Cold Beverages",
+        "name":  "Thums Up",
+        "price":  174,
+        "desc":  "Iconic strong fizzy Indian cola served chilled over ice.",
+        "veg":  true,
+        "img":  "Food/thums-up.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Cold Beverages",
+        "name":  "Passion Fruit Mojito",
+        "price":  324,
+        "desc":  "Exotic passion fruit with a sparkling twist.",
+        "veg":  true,
+        "img":  "assets/img/dishes/passion_fruit_mojito.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Cold Beverages",
+        "name":  "Raspberry Mojito",
+        "price":  324,
+        "desc":  "Tart raspberries blended with cooling mint.",
+        "veg":  true,
+        "img":  "assets/img/dishes/raspberry_mojito.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Cold Beverages",
+        "name":  "Virgin Mojito",
+        "price":  294,
+        "desc":  "Classic lime and mint sparkling perfection.",
+        "veg":  true,
+        "img":  "assets/img/dishes/virgin_mojito.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Cold Beverages",
+        "name":  "Diet Coke",
+        "price":  194,
+        "desc":  "Chilled refreshing zero-calorie cola beverage served with lemon and ice.",
+        "veg":  true,
+        "img":  "assets/img/dishes/diet_coke.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Cold Beverages",
+        "name":  "Red Bull",
+        "price":  264,
+        "desc":  "Chilled energy drink served on ice.",
+        "veg":  true,
+        "img":  "assets/img/dishes/red_bull.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Cold Beverages",
+        "name":  "Nyla Wb",
+        "price":  199,
+        "desc":  "Premium packaged pure natural water.",
+        "veg":  true,
+        "img":  "assets/img/dishes/nyla_wb.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Milkshakes",
+        "name":  "Vanilla Milkshake",
+        "price":  334,
+        "desc":  "Creamy, smooth, and luxuriously sweet.",
+        "veg":  true,
+        "img":  "assets/img/dishes/vanilla_milkshake.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Milkshakes",
+        "name":  "Chocolate Milkshake",
+        "price":  354,
+        "desc":  "Rich chocolate folded into velvety milk.",
+        "veg":  true,
+        "img":  "assets/img/dishes/chocolate_milkshake.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Milkshakes",
+        "name":  "Cookies And Cream Milkshake",
+        "price":  364,
+        "desc":  "Crunchy cookie pieces swirled into silky milk.",
+        "veg":  true,
+        "img":  "assets/img/dishes/cookies_and_cream_milkshake.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Milkshakes",
+        "name":  "Hazelnut Cookies Milkshake",
+        "price":  374,
+        "desc":  "Nutty, indulgent, and decadently smooth.",
+        "veg":  true,
+        "img":  "assets/img/dishes/hazelnut_cookies_milkshake.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Milkshakes",
+        "name":  "Creamy Butterscotch Milkshake",
+        "price":  354,
+        "desc":  "Sweet, buttery, and luxuriously creamy.",
+        "veg":  true,
+        "img":  "assets/img/dishes/creamy_butterscotch_milkshake.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Milkshakes",
+        "name":  "Nutella Milkshake",
+        "price":  384,
+        "desc":  "Chocolate-hazelnut bliss, rich and indulgent.",
+        "veg":  true,
+        "img":  "assets/img/dishes/nutella_milkshake.jpg",
+        "isChefPick":  false
+    },
+    {
+        "category":  "Milkshakes",
+        "name":  "Hazelnut Milkshake",
+        "price":  354,
+        "desc":  "Rich and creamy milkshake blended with roasted hazelnut puree, premium dairy ice cream, and chocolate drizzle.",
+        "veg":  true,
+        "img":  "assets/img/dishes/hazelnut_milkshake.jpg",
+        "isChefPick":  false
+    }
+];
+
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = window.MENU_DATA;
+}
