@@ -50,6 +50,10 @@ while ($listener.IsListening) {
                 ".jpeg" { $response.ContentType = "image/jpeg" }
                 ".png"  { $response.ContentType = "image/png" }
                 ".svg"  { $response.ContentType = "image/svg+xml" }
+                ".woff2" { $response.ContentType = "font/woff2" }
+                ".woff" { $response.ContentType = "font/woff" }
+                ".ttf"  { $response.ContentType = "font/ttf" }
+                ".otf"  { $response.ContentType = "font/otf" }
                 default { $response.ContentType = "application/octet-stream" }
             }
             

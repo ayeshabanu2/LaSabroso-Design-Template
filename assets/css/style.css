@@ -1,7 +1,28 @@
 /* ==========================================================================
+   Brand & Signature Typography (@font-face matching lasabroso.srishanth.com)
+   ========================================================================== */
+@font-face {
+  font-family: 'Histerm';
+  src: url('../fonts/Histerm.woff2') format('woff2'),
+       url('../fonts/Histerm.ttf') format('truetype'),
+       url('../fonts/Histerm.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Dancing Script Local';
+  src: url('../fonts/DancingScript.ttf') format('truetype');
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ==========================================================================
    La Sabroso Café — Master Stylesheet (Warm Cozy Luxury Palette & Data-Driven Menu)
    Palette: Warm Ivory, Latte Beige, Soft Sand, Deep Espresso, Muted Terracotta, Antique Gold, Boho Neon
-   Typography: Playfair Display (Serif), Plus Jakarta Sans (Sans), Dancing Script (Script)
+   Typography: Histerm (Logo/Neon), Playfair Display (Serif), Plus Jakarta Sans (Sans), Dancing Script (Script)
    Mobile Optimized: Fluid Typography, Touch Targets >= 44px, Zero Overflow, Responsive Grids
    ========================================================================== */
 
@@ -44,10 +65,12 @@
   --shadow-card: 0 10px 30px rgba(31, 20, 13, 0.08);
   --shadow-hover: 0 14px 40px rgba(31, 20, 13, 0.14);
 
-  /* Typography */
+  /* Typography (Aligned with lasabroso.srishanth.com) */
   --font-serif: 'Playfair Display', Georgia, serif;
+  --font-display: 'Playfair Display', Georgia, serif;
   --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-  --font-script: 'Dancing Script', cursive;
+  --font-script: 'Dancing Script Local', 'Dancing Script', cursive;
+  --font-histerm: 'Histerm', cursive, sans-serif;
 
   /* Radii */
   --r-sm: 8px;
@@ -56,6 +79,29 @@
   --r-pill: 999px;
 
   --max-w: 1240px;
+}
+
+/* ---------- Typography Utilities ---------- */
+.font-histerm {
+  font-family: var(--font-histerm) !important;
+}
+
+.font-script {
+  font-family: var(--font-script) !important;
+}
+
+.font-serif,
+.font-display {
+  font-family: var(--font-serif) !important;
+}
+
+.font-sans {
+  font-family: var(--font-sans) !important;
+}
+
+.neon-css {
+  color: var(--c-neon);
+  text-shadow: 0 0 8px rgba(224, 86, 112, 0.7), 0 0 20px rgba(224, 86, 112, 0.45);
 }
 
 /* ---------- Global Resets ---------- */
@@ -367,20 +413,26 @@ button {
   width: 100%;
 }
 .nav__logo {
-  font-family: var(--font-serif);
-  font-size: clamp(20px, 4.5vw, 24px);
-  font-weight: 800;
+  font-family: var(--font-histerm);
+  font-size: clamp(30px, 6.5vw, 38px);
+  font-weight: 700;
   color: var(--text-dark-primary);
-  letter-spacing: 0.5px;
-  display: flex;
-  align-items: baseline;
-  gap: 4px;
+  letter-spacing: -0.5px;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  line-height: 1;
+  text-decoration: none;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+.nav__logo:hover {
+  transform: scale(1.03);
 }
 .nav__logo span {
-  font-family: var(--font-script);
+  font-family: var(--font-histerm);
   color: var(--c-terracotta);
-  font-size: clamp(26px, 5.5vw, 32px);
-  font-weight: 700;
+  font-size: inherit;
+  font-weight: inherit;
 }
 .nav__links {
   display: flex;
@@ -1522,16 +1574,22 @@ button {
   }
 }
 .footer-logo {
-  font-family: var(--font-serif);
-  font-size: 26px;
-  font-weight: 800;
+  font-family: var(--font-histerm);
+  font-size: clamp(34px, 6.5vw, 44px);
+  font-weight: 700;
   color: #FFFFFF;
   margin-bottom: 12px;
+  letter-spacing: -0.5px;
+  line-height: 1.1;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
 }
 .footer-logo span {
-  font-family: var(--font-script);
+  font-family: var(--font-histerm);
   color: var(--c-gold);
-  font-size: 34px;
+  font-size: inherit;
+  font-weight: inherit;
 }
 .footer h4 {
   font-family: var(--font-serif);

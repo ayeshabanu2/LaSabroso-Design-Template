@@ -1,9 +1,36 @@
 /* ==========================================================================
+   Brand & Signature Typography (@font-face matching lasabroso.srishanth.com)
+   ========================================================================== */
+@font-face {
+  font-family: 'Histerm';
+  src: url('assets/fonts/Histerm.woff2') format('woff2'),
+       url('assets/fonts/Histerm.ttf') format('truetype'),
+       url('assets/fonts/Histerm.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Dancing Script Local';
+  src: url('assets/fonts/DancingScript.ttf') format('truetype');
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ==========================================================================
    La Sabroso Café — Design System Tokens (DESIGN.md Aligned)
    Brand Token Spec: The Cafe La Sabroso, Madhapur, Hyderabad
    ========================================================================== */
 
 :root {
+  /* Typography Variables */
+  --font-histerm: 'Histerm', cursive, sans-serif;
+  --font-script: 'Dancing Script Local', 'Dancing Script', cursive;
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Nunito', system-ui, sans-serif;
   /* Requested Color Palette Tokens */
   --c-palette-cream: #EDE8D0;     /* #EDE8D0 Base Light Alabaster */
   --c-palette-taupe: #BAB095;     /* #BAB095 Muted Earth Taupe */
@@ -128,11 +155,23 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .brand-font {
-  font-family: 'Dancing Script', cursive;
+  font-family: var(--font-histerm);
+  letter-spacing: -0.5px;
 }
 
-.serif-font {
-  font-family: 'Playfair Display', Georgia, serif;
+.script-font,
+.font-script {
+  font-family: var(--font-script);
+}
+
+.font-histerm {
+  font-family: var(--font-histerm) !important;
+}
+
+.serif-font,
+.font-serif,
+.font-display {
+  font-family: var(--font-serif);
 }
 
 /* Custom Scrollbar */
@@ -202,11 +241,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .sidebar-brand-title {
-  font-family: 'Dancing Script', cursive;
-  font-size: 22px;
+  font-family: var(--font-histerm);
+  font-size: 26px;
   font-weight: 700;
   color: var(--c-forest);
   line-height: 1.1;
+  letter-spacing: -0.5px;
 }
 
 .sidebar-brand-subtitle {
