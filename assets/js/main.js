@@ -232,18 +232,59 @@
     }
   }
 
+  /* ---------- Gallery Filtering ---------- */
+  const filterBtns = document.querySelectorAll('.gallery-filter-btn');
+  const galleryGroups = document.querySelectorAll('.gallery-group');
+  const allCards = document.querySelectorAll('.gallery-card');
+
+  if (filterBtns.length) {
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+
+        if (filter === 'all') {
+          galleryGroups.forEach(group => group.style.display = 'block');
+          allCards.forEach(card => card.style.display = 'block');
+        } else if (filter === 'cafe') {
+          galleryGroups.forEach(group => {
+            group.style.display = (group.dataset.category === 'cafe') ? 'block' : 'none';
+          });
+          allCards.forEach(card => card.style.display = 'block');
+        } else if (filter === 'food') {
+          galleryGroups.forEach(group => {
+            group.style.display = (group.dataset.category === 'food-drinks') ? 'block' : 'none';
+          });
+          allCards.forEach(card => {
+            card.style.display = (card.dataset.category === 'food') ? 'block' : 'none';
+          });
+        } else if (filter === 'drinks') {
+          galleryGroups.forEach(group => {
+            group.style.display = (group.dataset.category === 'food-drinks') ? 'block' : 'none';
+          });
+          allCards.forEach(card => {
+            card.style.display = (card.dataset.category === 'drinks') ? 'block' : 'none';
+          });
+        }
+      });
+    });
+  }
+
   /* ---------- Interactive Lightbox Gallery ---------- */
   const lb = document.querySelector('.lightbox');
-  const galleryItems = Array.from(document.querySelectorAll('[data-lightbox]'));
+  const allLightboxItems = Array.from(document.querySelectorAll('[data-lightbox]'));
+  let currentActiveList = [];
   let currentIndex = 0;
 
-  if (lb && galleryItems.length) {
+  if (lb && allLightboxItems.length) {
     const lbImg = lb.querySelector('.lightbox__img') || lb.querySelector('img');
     const lbCaption = lb.querySelector('.lightbox__caption');
 
     const showImage = (index) => {
-      currentIndex = (index + galleryItems.length) % galleryItems.length;
-      const target = galleryItems[currentIndex];
+      const list = currentActiveList.length ? currentActiveList : allLightboxItems;
+      currentIndex = (index + list.length) % list.length;
+      const target = list[currentIndex];
       const src = target.dataset.full || target.src || (target.querySelector('img') ? target.querySelector('img').src : '');
       const caption = target.dataset.caption || (target.querySelector('img') ? target.querySelector('img').alt : '') || '';
 
@@ -251,9 +292,16 @@
       if (lbCaption) lbCaption.textContent = caption;
     };
 
-    galleryItems.forEach((item, index) => {
+    allLightboxItems.forEach((item) => {
       item.addEventListener('click', () => {
-        showImage(index);
+        // Collect currently visible lightbox items
+        currentActiveList = allLightboxItems.filter(el => {
+          return el.offsetParent !== null && window.getComputedStyle(el).display !== 'none';
+        });
+        if (!currentActiveList.length) currentActiveList = allLightboxItems;
+        currentIndex = currentActiveList.indexOf(item);
+        if (currentIndex === -1) currentIndex = 0;
+        showImage(currentIndex);
         lb.classList.add('open');
         document.body.style.overflow = 'hidden';
       });

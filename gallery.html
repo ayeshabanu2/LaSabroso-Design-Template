@@ -61,103 +61,207 @@
   </div>
 
   <!-- ===== PAGE HERO (Warm Ivory Header) ===== -->
-  <section class="section section--ivory" style="padding-top: 140px; padding-bottom: 50px; text-align: center;">
+  <section class="section section--ivory" style="padding-top: 140px; padding-bottom: 40px; text-align: center;">
     <div class="container">
       <span class="eyebrow eyebrow--terracotta">Visual Diary</span>
       <h1 class="headline-serif" style="font-size: clamp(38px, 5.5vw, 60px); color: var(--text-dark-primary); margin-bottom: 14px;">Moments @ La Sabroso</h1>
-      <p style="color: var(--text-dark-muted); max-width: 640px; margin: 0 auto 24px; font-size: 17px;">A showcase of our signature dishes, artisan beverages, and warm Boho Neon cafe corners.</p>
+      <p style="color: var(--text-dark-muted); max-width: 640px; margin: 0 auto 30px; font-size: 17px;">A showcase of our signature dishes, artisan beverages, and warm Boho Neon cafe corners in Madhapur.</p>
+
+      <!-- Category Filters -->
+      <div class="gallery-filters">
+        <button class="gallery-filter-btn active" data-filter="all">All Moments <span class="count">(18)</span></button>
+        <button class="gallery-filter-btn" data-filter="cafe">Cafe Ambience <span class="count">(9)</span></button>
+        <button class="gallery-filter-btn" data-filter="food">Signature Dishes <span class="count">(6)</span></button>
+        <button class="gallery-filter-btn" data-filter="drinks">Brews &amp; Desserts <span class="count">(3)</span></button>
+      </div>
     </div>
   </section>
 
   <!-- ===== GALLERY SECTION (Warm Cream Light Section) ===== -->
-  <section class="section section--light" style="padding-top: 50px;">
+  <section class="section section--light" style="padding-top: 20px; padding-bottom: 60px;">
     <div class="container">
       
-      <!-- GALLERY EDITORIAL GRID -->
-      <div class="gallery-editorial reveal">
-        <div class="gallery-item g-col-6" data-lightbox data-caption="La Sabroso Cafe main dining interior with fairy lights and warm timber">
-          <img src="cafe/cafe.webp" alt="La Sabroso Cafe main dining interior" loading="lazy">
-          <div class="gallery-item__overlay"><div class="gallery-item__caption">Main Dining Space &amp; Chandelier Glow</div></div>
+      <!-- CAFE AMBIENCE PROPER GRID -->
+      <div class="gallery-group" data-category="cafe">
+        <div class="gallery-subhead">
+          <span class="eyebrow eyebrow--terracotta">Boho Neon Interiors</span>
+          <h2>Cafe Ambience &amp; Spaces</h2>
+          <p>Step inside our Madhapur sanctuary — sculpted wave murals, radiant bohemian chandeliers, sunlit arch booths, and warm evening lighting.</p>
         </div>
 
-        <div class="gallery-item g-col-3" data-lightbox data-caption="Crispy thin-crust Peppy Paneer Pizza with fresh mozzarella and herbs">
-          <img src="Food/Peppy Paneer Pizza.avif" alt="Peppy Paneer Pizza" loading="lazy">
-          <div class="gallery-item__overlay"><div class="gallery-item__caption">Peppy Paneer Pizza</div></div>
+        <div class="gallery-grid-clean">
+          <div class="gallery-card" data-lightbox data-caption="La Sabroso Grand Dining Hall & Illuminated Bar Counter">
+            <img src="cafe/cafe.webp" alt="La Sabroso Grand Dining Hall" loading="lazy">
+            <div class="gallery-card__overlay">
+              <span class="gallery-card__tag">Main Hall</span>
+              <div class="gallery-card__title">Grand Dining Hall &amp; Bar Counter</div>
+              <p class="gallery-card__desc">Illuminated statement bar with bohemian woven chandeliers and organic wave architecture.</p>
+            </div>
+          </div>
+
+          <div class="gallery-card" data-lightbox data-caption="Sculpted Wall Murals & Evening Ambiance">
+            <img src="cafe/cafe_dining_3.jpg" alt="Sculpted Wall Murals & Evening Glow" loading="lazy">
+            <div class="gallery-card__overlay">
+              <span class="gallery-card__tag">Ambiance</span>
+              <div class="gallery-card__title">Sculpted Wall Murals &amp; Evening Glow</div>
+              <p class="gallery-card__desc">Soft warm light washing over hand-carved spiral wall textures and cafe tables.</p>
+            </div>
+          </div>
+
+          <div class="gallery-card" data-lightbox data-caption="Sunlit Arched Booths & Cozy Dining Nooks">
+            <img src="cafe/58303211-1cdb-411e-b353-e416e164bdd1_image6e1ae336057b44952b40b95c1139b7568.webp" alt="Sunlit Arched Booths" loading="lazy">
+            <div class="gallery-card__overlay">
+              <span class="gallery-card__tag">Seating</span>
+              <div class="gallery-card__title">Sunlit Arched Booths &amp; Nooks</div>
+              <p class="gallery-card__desc">Cathedral-style curved window alcoves with woven armchairs and natural daylight.</p>
+            </div>
+          </div>
+
+          <div class="gallery-card" data-lightbox data-caption="Elevated Dining Lounge & Ambient Warm Lighting">
+            <img src="cafe/fffb8553-1c8d-4fa4-8efa-35f60fb694ed_image168bde1b048b842908e755531911fc36d.webp" alt="Elevated Dining Lounge" loading="lazy">
+            <div class="gallery-card__overlay">
+              <span class="gallery-card__tag">Lounge</span>
+              <div class="gallery-card__title">Elevated Dining Lounge</div>
+              <p class="gallery-card__desc">Raised platform dining surrounded by flowing relief walls and soft fairy lights.</p>
+            </div>
+          </div>
+
+          <div class="gallery-card" data-lightbox data-caption="Architectural Wave Murals & Patterned Terrazzo Flooring">
+            <img src="cafe/restaurant069cb9cb81708e.webp" alt="Architectural Wave Murals" loading="lazy">
+            <div class="gallery-card__overlay">
+              <span class="gallery-card__tag">Architecture</span>
+              <div class="gallery-card__title">Wave Murals &amp; Terrazzo Floor</div>
+              <p class="gallery-card__desc">Overhead perspective showcasing organic wall relief and mosaic tile geometry.</p>
+            </div>
+          </div>
+
+          <div class="gallery-card" data-lightbox data-caption="Group Gathering Table with Woven Armchairs">
+            <img src="cafe/ab97b350-06b8-427f-8e48-a63548cdb9e2_image86ae698dabc644317a735c634dee8ba9c.webp" alt="Group Gathering Table" loading="lazy">
+            <div class="gallery-card__overlay">
+              <span class="gallery-card__tag">Group Seating</span>
+              <div class="gallery-card__title">Group Gathering Table</div>
+              <p class="gallery-card__desc">Long dining table for celebrations, team lunches, and casual family reunions.</p>
+            </div>
+          </div>
+
+          <div class="gallery-card" data-lightbox data-caption="Intimate Corner Tables & Pampas Grass Accents">
+            <img src="cafe/a1fb7a80-74bf-4a80-a339-3885c9daae81_image064ab8a2199d24def8a7d5ff8ac217062.webp" alt="Intimate Corner Tables" loading="lazy">
+            <div class="gallery-card__overlay">
+              <span class="gallery-card__tag">Cozy Corner</span>
+              <div class="gallery-card__title">Intimate Corner Seating</div>
+              <p class="gallery-card__desc">Tucked-away tables featuring rustic pampas grass centerpieces and plush throw cushions.</p>
+            </div>
+          </div>
+
+          <div class="gallery-card" data-lightbox data-caption="Minimalist Boho Dining Table Setting">
+            <img src="cafe/1.webp" alt="Minimalist Boho Dining Table" loading="lazy">
+            <div class="gallery-card__overlay">
+              <span class="gallery-card__tag">Table Setting</span>
+              <div class="gallery-card__title">Minimalist Boho Setting</div>
+              <p class="gallery-card__desc">Earthy white ceramic pedestals with handcrafted wooden caddies and dried botanicals.</p>
+            </div>
+          </div>
+
+          <div class="gallery-card" data-lightbox data-caption="Artisan Wooden Table Decor & Dining Setup">
+            <img src="cafe/cafe_dining_1.jpg" alt="Artisan Table Decor" loading="lazy">
+            <div class="gallery-card__overlay">
+              <span class="gallery-card__tag">Details</span>
+              <div class="gallery-card__title">Artisan Table Decor &amp; Service</div>
+              <p class="gallery-card__desc">Curated wooden tableware, amber glassware, and Mediterranean touches at every table.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CULINARY & DRINKS PROPER GRID -->
+      <div class="gallery-group" data-category="food-drinks">
+        <div class="gallery-subhead" style="margin-top: 20px;">
+          <span class="eyebrow eyebrow--terracotta">From Our Kitchen &amp; Bar</span>
+          <h2>Signature Dishes &amp; Artisan Sips</h2>
+          <p>Hand-stretched pizzas, luscious pastas, crispy starters, and slow cold brews prepared with passion.</p>
         </div>
 
-        <div class="gallery-item g-col-3" data-lightbox data-caption="Marry Me Chicken in sun-dried tomato cream and parmesan">
-          <img src="Food/Marry me chicken.avif" alt="Marry Me Chicken" loading="lazy">
-          <div class="gallery-item__overlay"><div class="gallery-item__caption">Marry Me Chicken</div></div>
-        </div>
+        <div class="gallery-grid-clean">
+          <div class="gallery-card" data-category="food" data-lightbox data-caption="Crispy thin-crust Peppy Paneer Pizza">
+            <img src="Food/Peppy Paneer Pizza.avif" alt="Peppy Paneer Pizza" loading="lazy">
+            <div class="gallery-card__overlay">
+              <span class="gallery-card__tag">Pizza</span>
+              <div class="gallery-card__title">Peppy Paneer Pizza</div>
+              <p class="gallery-card__desc">Crispy thin crust with spicy marinated paneer, bell peppers, and melted mozzarella.</p>
+            </div>
+          </div>
 
-        <div class="gallery-item g-col-4" data-lightbox data-caption="Lotus Biscoff Cold Coffee with rich caramel drizzle and crumbles">
-          <img src="Food/Lotus Biscoff Cold Coffee.avif" alt="Lotus Biscoff Cold Coffee" loading="lazy">
-          <div class="gallery-item__overlay"><div class="gallery-item__caption">Lotus Biscoff Cold Coffee</div></div>
-        </div>
+          <div class="gallery-card" data-category="food" data-lightbox data-caption="Tuscan Marry Me Chicken in sun-dried tomato cream">
+            <img src="Food/Marry me chicken.avif" alt="Marry Me Chicken" loading="lazy">
+            <div class="gallery-card__overlay">
+              <span class="gallery-card__tag">Main Course</span>
+              <div class="gallery-card__title">Marry Me Chicken</div>
+              <p class="gallery-card__desc">Succulent chicken simmered in rich sun-dried tomato cream sauce with parmesan.</p>
+            </div>
+          </div>
 
-        <div class="gallery-item g-col-4" data-lightbox data-caption="Cheesy Chicken Burger served with seasoned golden fries">
-          <img src="Food/Chessy Chicken Burger.avif" alt="Cheesy Chicken Burger" loading="lazy">
-          <div class="gallery-item__overlay"><div class="gallery-item__caption">Cheesy Chicken Burger</div></div>
-        </div>
+          <div class="gallery-card" data-category="food" data-lightbox data-caption="Signature Masala Mafia Pasta">
+            <img src="Food/Veg Masala Mafia Pasta.avif" alt="Veg Masala Mafia Pasta" loading="lazy">
+            <div class="gallery-card__overlay">
+              <span class="gallery-card__tag">Pasta</span>
+              <div class="gallery-card__title">Masala Mafia Pasta</div>
+              <p class="gallery-card__desc">Penne tossed in our famous spicy Indian-Italian fusion cream sauce with garlic toast.</p>
+            </div>
+          </div>
 
-        <div class="gallery-item g-col-4" data-lightbox data-caption="Signature Masala Mafia Pasta with fresh herbs and spices">
-          <img src="Food/Veg Masala Mafia Pasta.avif" alt="Veg Masala Mafia Pasta" loading="lazy">
-          <div class="gallery-item__overlay"><div class="gallery-item__caption">Masala Mafia Pasta</div></div>
-        </div>
+          <div class="gallery-card" data-category="food" data-lightbox data-caption="Cheesy Chicken Burger with golden fries">
+            <img src="Food/Chessy Chicken Burger.avif" alt="Cheesy Chicken Burger" loading="lazy">
+            <div class="gallery-card__overlay">
+              <span class="gallery-card__tag">Burgers</span>
+              <div class="gallery-card__title">Cheesy Chicken Burger</div>
+              <p class="gallery-card__desc">Crispy fried chicken patty topped with molten cheddar cheese and seasoned fries.</p>
+            </div>
+          </div>
 
-        <div class="gallery-item g-col-6" data-lightbox data-caption="Boho Neon evening corner seating and ambient lighting">
-          <img src="cafe/fffb8553-1c8d-4fa4-8efa-35f60fb694ed_image168bde1b048b842908e755531911fc36d.webp" alt="Boho Neon evening cafe corner" loading="lazy">
-          <div class="gallery-item__overlay"><div class="gallery-item__caption">Boho Neon Fairy Light Vibe</div></div>
-        </div>
+          <div class="gallery-card" data-category="food" data-lightbox data-caption="Honey Lemon Pepper Chicken Tenders">
+            <img src="Food/Honey Lemon Pepper Tenders.avif" alt="Honey Lemon Pepper Tenders" loading="lazy">
+            <div class="gallery-card__overlay">
+              <span class="gallery-card__tag">Starters</span>
+              <div class="gallery-card__title">Honey Lemon Pepper Tenders</div>
+              <p class="gallery-card__desc">Crispy golden tenders drizzled with sticky honey lemon glaze and freshly cracked pepper.</p>
+            </div>
+          </div>
 
-        <div class="gallery-item g-col-6" data-lightbox data-caption="Velvety Blueberry Cheesecake with slow-simmered berry compote">
-          <img src="Food/Blue Berry Cheese Cake.avif" alt="Blueberry Cheesecake" loading="lazy">
-          <div class="gallery-item__overlay"><div class="gallery-item__caption">Artisan Blueberry Cheesecake</div></div>
-        </div>
+          <div class="gallery-card" data-category="food" data-lightbox data-caption="Roasted Tomato Soup with Crisp Cheese Toast">
+            <img src="Food/Roasted Tomato Soup With Cheese Toast.avif" alt="Roasted Tomato Soup With Cheese Toast" loading="lazy">
+            <div class="gallery-card__overlay">
+              <span class="gallery-card__tag">Soups</span>
+              <div class="gallery-card__title">Roasted Tomato Soup &amp; Toast</div>
+              <p class="gallery-card__desc">Velvety slow-roasted vine tomato soup drizzled with cream, served with golden cheese toast.</p>
+            </div>
+          </div>
 
-        <div class="gallery-item g-col-4" data-lightbox data-caption="Crispy Honey Lemon Pepper Chicken Tenders with lemon glaze">
-          <img src="Food/Honey Lemon Pepper Tenders.avif" alt="Honey Lemon Pepper Chicken Tenders" loading="lazy">
-          <div class="gallery-item__overlay"><div class="gallery-item__caption">Honey Lemon Pepper Tenders</div></div>
-        </div>
+          <div class="gallery-card" data-category="drinks" data-lightbox data-caption="Artisan Blueberry Cheesecake">
+            <img src="Food/Blue Berry Cheese Cake.avif" alt="Blueberry Cheesecake" loading="lazy">
+            <div class="gallery-card__overlay">
+              <span class="gallery-card__tag">Desserts</span>
+              <div class="gallery-card__title">Artisan Blueberry Cheesecake</div>
+              <p class="gallery-card__desc">Rich New York-style cheesecake with slow-simmered whole blueberry compote.</p>
+            </div>
+          </div>
 
-        <div class="gallery-item g-col-4" data-lightbox data-caption="Warm ambient cafe seating and cozy booths">
-          <img src="cafe/58303211-1cdb-411e-b353-e416e164bdd1_image6e1ae336057b44952b40b95c1139b7568.webp" alt="Warm ambient cafe seating" loading="lazy">
-          <div class="gallery-item__overlay"><div class="gallery-item__caption">Warm Cafe Seating &amp; Booths</div></div>
-        </div>
+          <div class="gallery-card" data-category="drinks" data-lightbox data-caption="Lotus Biscoff Cold Coffee">
+            <img src="Food/Lotus Biscoff Cold Coffee.avif" alt="Lotus Biscoff Cold Coffee" loading="lazy">
+            <div class="gallery-card__overlay">
+              <span class="gallery-card__tag">Beverages</span>
+              <div class="gallery-card__title">Lotus Biscoff Cold Coffee</div>
+              <p class="gallery-card__desc">Espresso blended with creamy Lotus Biscoff spread, topped with crunchy biscuit crumbles.</p>
+            </div>
+          </div>
 
-        <div class="gallery-item g-col-4" data-lightbox data-caption="Roasted Tomato Soup with Crisp Cheese Toast">
-          <img src="Food/Roasted Tomato Soup With Cheese Toast.avif" alt="Roasted Tomato Soup With Cheese Toast" loading="lazy">
-          <div class="gallery-item__overlay"><div class="gallery-item__caption">Tomato Soup &amp; Cheese Toast</div></div>
-        </div>
-
-        <div class="gallery-item g-col-3" data-lightbox data-caption="Thick dark Parisian-style French Hot Chocolate">
-          <img src="Food/French Hot Chocolate.avif" alt="French Hot Chocolate" loading="lazy">
-          <div class="gallery-item__overlay"><div class="gallery-item__caption">French Hot Chocolate</div></div>
-        </div>
-
-        <div class="gallery-item g-col-3" data-lightbox data-caption="Matcha Cold Coffee and specialty drinks">
-          <img src="Food/Matcha Cold Coffee.avif" alt="Matcha Cold Coffee" loading="lazy">
-          <div class="gallery-item__overlay"><div class="gallery-item__caption">Matcha Cold Coffee</div></div>
-        </div>
-
-        <div class="gallery-item g-col-3" data-lightbox data-caption="Artisan Veg Caesar Sandwich on toasted crust">
-          <img src="Food/Veg Caesar Sandwich.avif" alt="Veg Caesar Sandwich" loading="lazy">
-          <div class="gallery-item__overlay"><div class="gallery-item__caption">Veg Caesar Sandwich</div></div>
-        </div>
-
-        <div class="gallery-item g-col-3" data-lightbox data-caption="Cafe barista bar and coffee roastery setup">
-          <img src="cafe/1.webp" alt="Cafe barista bar" loading="lazy">
-          <div class="gallery-item__overlay"><div class="gallery-item__caption">Artisan Coffee Bar</div></div>
-        </div>
-
-        <div class="gallery-item g-col-6" data-lightbox data-caption="Outdoor garden and patio seating area">
-          <img src="cafe/ab97b350-06b8-427f-8e48-a63548cdb9e2_image86ae698dabc644317a735c634dee8ba9c.webp" alt="Outdoor patio seating" loading="lazy">
-          <div class="gallery-item__overlay"><div class="gallery-item__caption">Outdoor Patio &amp; Greenery</div></div>
-        </div>
-
-        <div class="gallery-item g-col-6" data-lightbox data-caption="Cafe dining room arrangement and table setups">
-          <img src="cafe/a1fb7a80-74bf-4a80-a339-3885c9daae81_image064ab8a2199d24def8a7d5ff8ac217062.webp" alt="Cafe dining arrangement" loading="lazy">
-          <div class="gallery-item__overlay"><div class="gallery-item__caption">Cafe Dining Layout</div></div>
+          <div class="gallery-card" data-category="drinks" data-lightbox data-caption="Parisian French Hot Chocolate">
+            <img src="Food/French Hot Chocolate.avif" alt="French Hot Chocolate" loading="lazy">
+            <div class="gallery-card__overlay">
+              <span class="gallery-card__tag">Beverages</span>
+              <div class="gallery-card__title">French Hot Chocolate</div>
+              <p class="gallery-card__desc">Dense, velvety Parisian melted dark chocolate served with a crisp biscuit ladyfinger.</p>
+            </div>
+          </div>
         </div>
       </div>
 
