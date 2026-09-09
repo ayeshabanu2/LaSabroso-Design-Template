@@ -434,6 +434,18 @@ button {
   font-size: inherit;
   font-weight: inherit;
 }
+.nav__logo-icon {
+  height: 34px;
+  width: auto;
+  margin-right: 8px;
+  display: inline-block;
+  vertical-align: middle;
+  flex-shrink: 0;
+  transition: transform 0.25s ease;
+}
+.nav__logo:hover .nav__logo-icon {
+  transform: rotate(-6deg) scale(1.08);
+}
 .nav__links {
   display: flex;
   align-items: center;
@@ -1800,6 +1812,19 @@ button {
   font-size: inherit;
   font-weight: inherit;
 }
+.footer-logo-icon {
+  height: 36px;
+  width: auto;
+  margin-right: 8px;
+  display: inline-block;
+  vertical-align: middle;
+  flex-shrink: 0;
+  filter: brightness(0) invert(1);
+  transition: transform 0.25s ease;
+}
+.footer-logo:hover .footer-logo-icon {
+  transform: rotate(-6deg) scale(1.08);
+}
 .footer h4 {
   font-family: var(--font-serif);
   font-size: 17px;
@@ -1946,4 +1971,15 @@ button {
 @media (max-width: 540px) {
   .lightbox__prev { left: 8px; }
   .lightbox__next { right: 8px; }
+}
+
+@media (max-width: 768px) {
+  .nav__logo-icon {
+    height: 28px;
+    margin-right: 6px;
+  }
+  .footer-logo-icon {
+    height: 30px;
+    margin-right: 6px;
+  }
 }
